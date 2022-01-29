@@ -6,5 +6,5 @@ option csharp_namespace = "TournamentAssistantShared.Models.Packets";
 import "score.proto";
 
 message SubmitScore {
-	Score score = 1;
+  Score score = 1;
 }

@@ -6,5 +6,5 @@ option csharp_namespace = "TournamentAssistantShared.Models.Packets";
 import "score.proto";
 
 message ScoreRequestResponse {
-	repeated Score scores = 1;
+  repeated Score scores = 1;
 }

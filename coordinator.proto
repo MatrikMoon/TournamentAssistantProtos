@@ -6,5 +6,5 @@ option csharp_namespace = "TournamentAssistantShared.Models";
 import "user.proto";
 
 message Coordinator {
-	User user = 1;
+  User user = 1;
 }

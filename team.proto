@@ -4,6 +4,6 @@ package TournamentAssistantShared.Models;
 option csharp_namespace = "TournamentAssistantShared.Models";
 
 message Team {
-	string id = 1;
-	string name = 2;
+  string id = 1;
+  string name = 2;
 }
