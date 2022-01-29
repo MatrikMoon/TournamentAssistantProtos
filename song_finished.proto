@@ -7,14 +7,14 @@ import "player.proto";
 import "beatmap.proto";
 
 message SongFinished {
-	enum CompletionType {
-		Passed = 0;
-		Failed = 1;
-		Quit = 2;
-	}
+  enum CompletionType {
+    Passed = 0;
+    Failed = 1;
+    Quit = 2;
+  }
 
-	Player player = 1;
-	Beatmap beatmap = 2;
-	CompletionType type = 3;
-	int32 score = 4;
+  Player player = 1;
+  Beatmap beatmap = 2;
+  CompletionType type = 3;
+  int32 score = 4;
 }

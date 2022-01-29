@@ -4,6 +4,6 @@ package TournamentAssistantShared.Models.Packets;
 option csharp_namespace = "TournamentAssistantShared.Models.Packets";
 
 message LoadSong {
-	string level_id = 1;
-	string custom_host_url = 2;
+  string level_id = 1;
+  string custom_host_url = 2;
 }

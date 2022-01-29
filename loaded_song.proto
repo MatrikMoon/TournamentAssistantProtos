@@ -6,5 +6,5 @@ option csharp_namespace = "TournamentAssistantShared.Models.Packets";
 import "preview_beatmap_level.proto";
 
 message LoadedSong {
-	PreviewBeatmapLevel level = 1;
+  PreviewBeatmapLevel level = 1;
 }

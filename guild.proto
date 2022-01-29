@@ -4,6 +4,6 @@ package TournamentAssistantShared.Models.Discord;
 option csharp_namespace = "TournamentAssistantShared.Models.Discord";
 
 message Guild {
-	int32 id = 1;
-    string name = 2;
+  int32 id = 1;
+  string name = 2;
 }
