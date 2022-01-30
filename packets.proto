@@ -1,0 +1,201 @@
+syntax = "proto3";
+package proto.packet;
+
+option csharp_namespace = "TournamentAssistantShared.model.Packets";
+
+import "google/protobuf/any.proto";
+import "discord.proto";
+import "models.proto";
+
+message Acknowledgement {
+  enum AcknowledgementType {
+    MessageReceived = 0;
+    FileDownloaded = 1;
+  }
+
+  string packet_id = 1;
+  AcknowledgementType type = 2;
+}
+
+message Command {
+  enum CommandTypes {
+    Heartbeat = 0;
+    ReturnToMenu = 1;
+    ScreenOverlay_ShowPng = 2;
+    ScreenOverlay_ShowGreen = 3;
+    DelayTest_Finish = 4;
+  }
+
+  CommandTypes command_type = 1;
+}
+
+message Connect {
+  enum ConnectTypes {
+    Player = 0;
+    Coordinator = 1;
+    TemporaryConnection = 2;
+  }
+
+  ConnectTypes client_type = 1;
+  string name = 2;
+  string password = 3;
+  string user_id = 4;
+  int32 client_version = 5;
+}
+
+message Response {
+  enum ResponseType {
+    Fail = 0;
+    Success = 1;
+  }
+
+  ResponseType type = 1;
+  string message = 2;
+}
+
+message ConnectResponse {
+  Response response = 1;
+  model.User self = 2;
+  model.State state = 3;
+  int32 server_version = 4;
+}
+
+message File {
+  enum Intentions {
+    None = 0;
+    SetPngToShowWhenTriggered = 1; //Image will be stored in the StreamSyncController and displayed when the DelayTest_Trigger command is received
+    ShowPngImmediately = 2; //Image will be immediately displayed if the StreamSyncController is active
+  }
+
+  string file_id = 1;
+  Intentions intent = 2;
+  bool compressed = 3;
+  bytes data = 4;
+}
+
+message LoadedSong {
+  model.PreviewBeatmapLevel level = 1;
+}
+
+message Event {
+
+  message PlayerAddedEvent {
+    model.Player player = 1;
+  }
+
+  message PlayerUpdatedEvent {
+    model.Player player = 1;
+  }
+
+  message PlayerLeftEvent {
+    model.Player player = 1;
+  }
+
+  message CoordinatorAddedEvent {
+    model.Coordinator coordinator = 1;
+  }
+
+  message CoordinatorLeftEvent {
+    model.Coordinator coordinator = 1;
+  }
+
+  message MatchCreatedEvent {
+    model.Match match = 1;
+  }
+
+  message MatchUpdatedEvent {
+    model.Match match = 1;
+  }
+
+  message MatchDeletedEvent {
+    model.Match match = 1;
+  }
+
+  message QualifierCreatedEvent {
+    model.QualifierEvent event = 1;
+  }
+
+  message QualifierUpdatedEvent {
+    model.QualifierEvent event = 1;
+  }
+
+  message QualifierDeletedEvent {
+    model.QualifierEvent event = 1;
+  }
+
+  message HostAddedEvent {
+    model.CoreServer server = 1;
+  }
+
+  message HostDeletedEvent {
+    model.CoreServer server = 1;
+  }
+
+  oneof changed_object {
+    PlayerAddedEvent player_added_event = 1;
+    PlayerUpdatedEvent player_updated_event = 2;
+    PlayerLeftEvent player_left_event = 3;
+    CoordinatorAddedEvent coordinator_added_event = 4;
+    CoordinatorLeftEvent coordinator_left_event = 5;
+    MatchCreatedEvent match_created_event = 6;
+    MatchUpdatedEvent match_updated_event = 7;
+    MatchDeletedEvent match_deleted_event = 8;
+    QualifierCreatedEvent qualifier_created_event = 9;
+    QualifierUpdatedEvent qualifier_updated_event = 10;
+    QualifierDeletedEvent qualifier_deleted_event = 11;
+    HostAddedEvent host_added_event = 12;
+    HostDeletedEvent host_deleted_event = 13;
+  }
+}
+
+message LoadSong {
+  string level_id = 1;
+  string custom_host_url = 2;
+}
+
+message PlaySong {
+  model.GameplayParameters gameplay_parameters = 1;
+  bool floating_scoreboard = 3;
+  bool stream_sync = 4;
+  bool disable_fail = 5;
+  bool disable_pause = 6;
+  bool disable_scoresaber_submission = 7;
+  bool show_normal_notes_on_stream = 8;
+}
+
+message SubmitScore {
+  model.Score score = 1;
+}
+
+message SongFinished {
+  enum CompletionType {
+    Passed = 0;
+    Failed = 1;
+    Quit = 2;
+  }
+
+  model.Player player = 1;
+  model.Beatmap beatmap = 2;
+  CompletionType type = 3;
+  int32 score = 4;
+}
+
+message SendBotMessage {
+  discord.Channel channel = 1;
+  string message = 2;
+}
+
+message ScoreRequestResponse {
+  repeated model.Score scores = 1;
+}
+
+message ScoreRequest {
+  string event_id = 1;
+  model.GameplayParameters parameters = 2;
+}
+
+message ForwardingPacket {
+  repeated string forward_to = 1;
+  // oneof packets... We definitely should change that some time... lul
+  google.protobuf.Any specific_packet = 2;
+}

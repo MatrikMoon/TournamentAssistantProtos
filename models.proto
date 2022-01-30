@@ -1,0 +1,203 @@
+syntax = "proto3";
+package proto.model;
+
+option csharp_namespace = "TournamentAssistantShared.Models";
+
+import "discord.proto";
+
+message Characteristic {
+  string serialized_name = 1;
+  repeated int32 difficulties = 2;
+}
+
+message Beatmap {
+  string name = 1;
+  string level_id = 2;
+  Characteristic characteristic = 3;
+  int32 difficulty = 4;
+}
+
+message PreviewBeatmapLevel {
+  string level_id = 1;
+  string name = 2;
+  repeated Characteristic characteristics = 3;
+  bool loaded = 4;
+}
+
+message User {
+  string id = 2;
+  string name = 3;
+}
+
+message Coordinator {
+  User user = 1;
+}
+
+message GameplayModifiers {
+  enum GameOptions {
+    None = 0;
+
+    //Negative modifiers
+    NoFail = 1;
+    NoBombs = 2;
+    NoArrows = 4;
+    NoObstacles = 8;
+    SlowSong = 16;
+
+    //Positive Modifiers
+    InstaFail = 32;
+    FailOnClash = 64;
+    BatteryEnergy = 128;
+    FastNotes = 256;
+    FastSong = 512;
+    DisappearingArrows = 1024;
+    GhostNotes = 2048;
+
+    //1.12.2 Additions
+    DemoNoFail = 4096;
+    DemoNoObstacles = 8192;
+    StrictAngles = 16384;
+
+    //1.13.4 Additions
+    ProMode = 32768;
+    ZenMode = 65536;
+    SmallCubes = 131072;
+    SuperFastSong = 262144;
+  }
+  GameOptions options = 1;
+}
+
+message PlayerSpecificSettings {
+  enum PlayerOptions {
+    None = 0;
+    LeftHanded = 1;
+    StaticLights = 2;
+    NoHud = 4;
+    AdvancedHud = 8;
+    ReduceDebris = 16;
+    AutoPlayerHeight = 32;
+    NoFailEffects = 64;
+    AutoRestart = 128;
+    HideNoteSpawnEffect = 256;
+    AdaptiveSfx = 512;
+  }
+  enum NoteJumpDurationTypeSettings {
+    Dynamic = 0;
+    Static = 1;
+  }
+  float player_height = 1;
+  float sfx_volume = 2;
+  float saber_trail_intensity = 3;
+  float note_jump_start_beat_offset = 4;
+  float note_jump_fixed_duration = 5;
+  PlayerOptions options = 6;
+  NoteJumpDurationTypeSettings note_jump_duration_type_settings = 7;
+}
+
+message GameplayParameters {
+  Beatmap beatmap = 1;
+  PlayerSpecificSettings player_settings = 2;
+  GameplayModifiers gameplay_modifiers = 3;
+}
+
+message Team {
+  string id = 1;
+  string name = 2;
+}
+
+message ServerSettings {
+  string server_name = 1;
+  string password = 2;
+  bool enable_teams = 3;
+  repeated Team teams = 4;
+  int32 score_update_frequency = 5;
+  repeated string banned_mods = 6;
+}
+
+message SongList {
+  repeated PreviewBeatmapLevel levels = 1;
+}
+
+message Player {
+  User user = 1;
+  enum PlayStates {
+    Waiting = 0;
+    InGame = 1;
+  }
+  enum DownloadStates {
+    None = 0;
+    Downloading = 1;
+    Downloaded = 2;
+    DownloadError = 3;
+  }
+
+  message Point {
+    int32 x = 1;
+    int32 y = 2;
+  }
+
+  string user_id = 2;
+  Team team = 3;
+  PlayStates play_state = 4;
+  DownloadStates download_state = 5;
+  int32 score = 6;
+  int32 combo = 7;
+  double accuracy = 8;
+  double song_position = 9;
+  SongList song_list = 10;
+  repeated string mod_list = 11;
+  Point stream_screen_coordinates = 12;
+  int64 stream_delay_ms = 13;
+  int64 stream_sync_start_ms = 14;
+}
+
+message Match {
+  string guid = 1;
+  repeated Player players = 2;
+  User leader = 3;
+  PreviewBeatmapLevel selected_level = 5;
+  Characteristic selected_characteristic = 6;
+  int32 selected_difficulty = 7;
+}
+
+message QualifierEvent {
+  enum EventSettings {
+    None = 0;
+    HideScoresFromPlayers = 1;
+    DisableScoresaberSubmission = 2;
+    EnableLeaderboardMessage = 3;
+  }
+
+  string event_id = 1;
+  string name = 2;
+  discord.Guild guild = 3;
+  discord.Channel info_channel = 4;
+  repeated GameplayParameters qualifier_maps = 5;
+  bool send_scores_to_info_channel = 6;
+  int32 flags = 7;
+}
+
+message CoreServer {
+  string name = 1;
+  string address = 2;
+  int32 port = 3;
+}
+
+message State {
+  ServerSettings server_settings = 1;
+  repeated Player players = 2;
+  repeated Coordinator coordinators = 3;
+  repeated Match matches = 4;
+  repeated QualifierEvent events = 5;
+  repeated CoreServer known_hosts = 6;
+}
+
+message Score {
+  string event_id = 1;
+  GameplayParameters parameters = 2;
+  string user_id = 3;
+  string username = 4;
+  int32 score = 5;
+  bool full_combo = 6;
+  string color = 7;
+}
