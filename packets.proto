@@ -195,23 +195,25 @@ message ScoreRequest {
 }
 
 message Packet {
-  string from = 1;
+  string id = 1;
+  string from = 2;
   oneof packet {
-    Acknowledgement acknowledgement = 2;
-    Command command = 3;
-    Connect connect = 4;
-    Response response = 5;
-    ConnectResponse connect_response = 6;
-    File file = 7;
-    LoadedSong loaded_song = 8;
-    Event event = 9;
-    LoadSong load_song = 10;
-    PlaySong play_song = 11;
-    SubmitScore submit_score = 12;
-    SongFinished song_finished = 13;
-    SendBotMessage send_bot_message = 14;
-    ScoreRequestResponse score_request_response = 15;
-    ScoreRequest score_request = 16;
+    Acknowledgement acknowledgement = 3;
+    Command command = 4;
+    Connect connect = 5;
+    Response response = 6;
+    ConnectResponse connect_response = 7;
+    File file = 8;
+    LoadedSong loaded_song = 9;
+    Event event = 10;
+    LoadSong load_song = 11;
+    PlaySong play_song = 12;
+    SubmitScore submit_score = 13;
+    SongFinished song_finished = 14;
+    SendBotMessage send_bot_message = 15;
+    ScoreRequestResponse score_request_response = 16;
+    ScoreRequest score_request = 17;
+    ForwardingPacket forwarding_packet = 18;
   }
 }
 
