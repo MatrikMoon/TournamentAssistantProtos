@@ -1,7 +1,7 @@
 syntax = "proto3";
 package proto.packet;
 
-option csharp_namespace = "TournamentAssistantShared.model.Packets";
+option csharp_namespace = "TournamentAssistantShared.Models.Packets";
 
 import "google/protobuf/any.proto";
 import "discord.proto";
@@ -194,23 +194,27 @@ message ScoreRequest {
   model.GameplayParameters parameters = 2;
 }
 
+message Packet {
+  oneof packet {
+    Acknowledgement acknowledgement = 1;
+    Command command = 2;
+    Connect connect = 3;
+    Response response = 4;
+    ConnectResponse connect_response = 5;
+    File file = 6;
+    LoadedSong loaded_song = 7;
+    Event event = 8;
+    LoadSong load_song = 9;
+    PlaySong play_song = 10;
+    SubmitScore submit_score = 11;
+    SongFinished song_finished = 12;
+    SendBotMessage send_bot_message = 13;
+    ScoreRequestResponse score_request_response = 14;
+    ScoreRequest score_request = 15;
+  }
+}
+
 message ForwardingPacket {
   repeated string forward_to = 1;
-  oneof packet {
-    Acknowledgement acknowledgement = 2;
-    Command command = 3;
-    Connect connect = 4;
-    Response response = 5;
-    ConnectResponse connect_response = 6;
-    File file = 7;
-    LoadedSong loaded_song = 8;
-    Event event = 9;
-    LoadSong load_song = 10;
-    PlaySong play_song = 11;
-    SubmitScore submit_score = 12;
-    SongFinished song_finished = 13;
-    SendBotMessage send_bot_message = 14;
-    ScoreRequestResponse score_request_response = 15;
-    ScoreRequest score_request = 16;
-  }
+  Packet packet = 2;
 }
