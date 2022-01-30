@@ -196,6 +196,21 @@ message ScoreRequest {
 
 message ForwardingPacket {
   repeated string forward_to = 1;
-  // oneof packets... We definitely should change that some time... lul
-  google.protobuf.Any specific_packet = 2;
+  oneof packet {
+    Acknowledgement acknowledgement = 2;
+    Command command = 3;
+    Connect connect = 4;
+    Response response = 5;
+    ConnectResponse connect_response = 6;
+    File file = 7;
+    LoadedSong loaded_song = 8;
+    Event event = 9;
+    LoadSong load_song = 10;
+    PlaySong play_song = 11;
+    SubmitScore submit_score = 12;
+    SongFinished song_finished = 13;
+    SendBotMessage send_bot_message = 14;
+    ScoreRequestResponse score_request_response = 15;
+    ScoreRequest score_request = 16;
+  }
 }
