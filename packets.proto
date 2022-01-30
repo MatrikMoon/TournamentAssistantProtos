@@ -215,6 +215,7 @@ message Packet {
 }
 
 message ForwardingPacket {
-  repeated string forward_to = 1;
-  Packet packet = 2;
+  string from = 1;
+  repeated string forward_to = 2;
+  Packet packet = 3;
 }
