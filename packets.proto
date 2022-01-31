@@ -3,7 +3,6 @@ package proto.packet;
 
 option csharp_namespace = "TournamentAssistantShared.Models.Packets";
 
-import "google/protobuf/any.proto";
 import "discord.proto";
 import "models.proto";
 
