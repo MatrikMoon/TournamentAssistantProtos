@@ -1,7 +1,7 @@
 syntax = "proto3";
 package proto.packet;
 
-option csharp_namespace = "TournamentAssistantShared.model.Packets";
+option csharp_namespace = "TournamentAssistantShared.Models.Packets";
 
 import "discord.proto";
 import "models.proto";
@@ -54,8 +54,8 @@ message Response {
 
 message ConnectResponse {
   Response response = 1;
-  model.User self = 2;
-  model.State state = 3;
+  models.User self = 2;
+  models.State state = 3;
   int32 server_version = 4;
 }
 
@@ -73,61 +73,61 @@ message File {
 }
 
 message LoadedSong {
-  model.PreviewBeatmapLevel level = 1;
+  models.PreviewBeatmapLevel level = 1;
 }
 
 message Event {
 
   message PlayerAddedEvent {
-    model.Player player = 1;
+    models.Player player = 1;
   }
 
   message PlayerUpdatedEvent {
-    model.Player player = 1;
+    models.Player player = 1;
   }
 
   message PlayerLeftEvent {
-    model.Player player = 1;
+    models.Player player = 1;
   }
 
   message CoordinatorAddedEvent {
-    model.Coordinator coordinator = 1;
+    models.Coordinator coordinator = 1;
   }
 
   message CoordinatorLeftEvent {
-    model.Coordinator coordinator = 1;
+    models.Coordinator coordinator = 1;
   }
 
   message MatchCreatedEvent {
-    model.Match match = 1;
+    models.Match match = 1;
   }
 
   message MatchUpdatedEvent {
-    model.Match match = 1;
+    models.Match match = 1;
   }
 
   message MatchDeletedEvent {
-    model.Match match = 1;
+    models.Match match = 1;
   }
 
   message QualifierCreatedEvent {
-    model.QualifierEvent event = 1;
+    models.QualifierEvent event = 1;
   }
 
   message QualifierUpdatedEvent {
-    model.QualifierEvent event = 1;
+    models.QualifierEvent event = 1;
   }
 
   message QualifierDeletedEvent {
-    model.QualifierEvent event = 1;
+    models.QualifierEvent event = 1;
   }
 
   message HostAddedEvent {
-    model.CoreServer server = 1;
+    models.CoreServer server = 1;
   }
 
   message HostDeletedEvent {
-    model.CoreServer server = 1;
+    models.CoreServer server = 1;
   }
 
   oneof changed_object {
@@ -153,7 +153,7 @@ message LoadSong {
 }
 
 message PlaySong {
-  model.GameplayParameters gameplay_parameters = 1;
+  models.GameplayParameters gameplay_parameters = 1;
   bool floating_scoreboard = 3;
   bool stream_sync = 4;
   bool disable_fail = 5;
@@ -163,7 +163,7 @@ message PlaySong {
 }
 
 message SubmitScore {
-  model.Score score = 1;
+  models.Score score = 1;
 }
 
 message SongFinished {
@@ -173,8 +173,8 @@ message SongFinished {
     Quit = 2;
   }
 
-  model.Player player = 1;
-  model.Beatmap beatmap = 2;
+  models.Player player = 1;
+  models.Beatmap beatmap = 2;
   CompletionType type = 3;
   int32 score = 4;
 }
@@ -185,12 +185,12 @@ message SendBotMessage {
 }
 
 message ScoreRequestResponse {
-  repeated model.Score scores = 1;
+  repeated models.Score scores = 1;
 }
 
 message ScoreRequest {
   string event_id = 1;
-  model.GameplayParameters parameters = 2;
+  models.GameplayParameters parameters = 2;
 }
 
 message ForwardingPacket {
