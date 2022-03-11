@@ -1,5 +1,5 @@
 syntax = "proto3";
-package proto.model;
+package proto.models;
 
 option csharp_namespace = "TournamentAssistantShared.Models";
 
