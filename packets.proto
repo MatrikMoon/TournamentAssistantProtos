@@ -1,7 +1,7 @@
 syntax = "proto3";
 package proto.packet;
 
-option csharp_namespace = "TournamentAssistantShared.model.Packets";
+option csharp_namespace = "TournamentAssistantShared.Models.Packets";
 
 import "discord.proto";
 import "models.proto";
