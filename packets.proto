@@ -193,8 +193,30 @@ message ScoreRequest {
   models.GameplayParameters parameters = 2;
 }
 
+message Packet {
+  string id = 1;
+  string from = 2;
+  oneof packet {
+    Acknowledgement acknowledgement = 3;
+    Command command = 4;
+    Connect connect = 5;
+    Response response = 6;
+    ConnectResponse connect_response = 7;
+    File file = 8;
+    LoadedSong loaded_song = 9;
+    Event event = 10;
+    LoadSong load_song = 11;
+    PlaySong play_song = 12;
+    SubmitScore submit_score = 13;
+    SongFinished song_finished = 14;
+    SendBotMessage send_bot_message = 15;
+    ScoreRequestResponse score_request_response = 16;
+    ScoreRequest score_request = 17;
+    ForwardingPacket forwarding_packet = 18;
+  }
+}
+
 message ForwardingPacket {
   repeated string forward_to = 1;
-  // oneof packets... We definitely should change that some time... lul
-  google.protobuf.Any specific_packet = 2;
+  Packet packet = 2;
 }
