@@ -77,7 +77,6 @@ message LoadedSong {
 }
 
 message Event {
-
   message PlayerAddedEvent {
     models.Player player = 1;
   }
