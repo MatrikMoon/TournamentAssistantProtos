@@ -142,13 +142,14 @@ message Player {
   DownloadStates download_state = 5;
   int32 score = 6;
   int32 combo = 7;
-  double accuracy = 8;
-  double song_position = 9;
-  SongList song_list = 10;
-  repeated string mod_list = 11;
-  Point stream_screen_coordinates = 12;
-  int64 stream_delay_ms = 13;
-  int64 stream_sync_start_ms = 14;
+  int32 misses = 8;
+  double accuracy = 9;
+  double song_position = 10;
+  SongList song_list = 11;
+  repeated string mod_list = 12;
+  Point stream_screen_coordinates = 13;
+  int64 stream_delay_ms = 14;
+  int64 stream_sync_start_ms = 15;
 }
 
 message Match {
@@ -158,6 +159,7 @@ message Match {
   PreviewBeatmapLevel selected_level = 5;
   Characteristic selected_characteristic = 6;
   int32 selected_difficulty = 7;
+  string start_time = 8;
 }
 
 message QualifierEvent {
