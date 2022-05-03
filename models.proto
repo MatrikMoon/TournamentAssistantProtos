@@ -203,3 +203,8 @@ message Score {
   bool full_combo = 6;
   string color = 7;
 }
+
+message MessageOption {
+    string label = 1;
+    string value = 2;
+}
