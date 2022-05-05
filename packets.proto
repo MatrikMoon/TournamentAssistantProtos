@@ -212,10 +212,26 @@ message Packet {
     ScoreRequestResponse score_request_response = 16;
     ScoreRequest score_request = 17;
     ForwardingPacket forwarding_packet = 18;
+    Message message = 19;
+    MessageResponse message_response = 20;
   }
 }
 
 message ForwardingPacket {
   repeated string forward_to = 1;
   Packet packet = 2;
+}
+
+message Message {
+    string id = 1;
+    string message_title = 2;
+    string message_text = 3;
+    bool can_close = 4;
+    models.MessageOption option_1 = 5;
+    models.MessageOption option_2 = 6;
+}
+
+message MessageResponse {
+    string packet_id = 1;
+    string value = 2;
 }
