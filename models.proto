@@ -24,15 +24,6 @@ message PreviewBeatmapLevel {
   bool loaded = 4;
 }
 
-message User {
-  string id = 2;
-  string name = 3;
-}
-
-message Coordinator {
-  User user = 1;
-}
-
 message GameplayModifiers {
   enum GameOptions {
     None = 0;
@@ -118,8 +109,7 @@ message SongList {
   repeated PreviewBeatmapLevel levels = 1;
 }
 
-message Player {
-  User user = 1;
+message User {
   enum PlayStates {
     Waiting = 0;
     InGame = 1;
@@ -130,11 +120,20 @@ message Player {
     Downloaded = 2;
     DownloadError = 3;
   }
+  enum ClientTypes {
+    Player = 0;
+    Coordinator = 1;
+    TemporaryConnection = 2;
+    WebsocketConnection = 3;
+  }
 
   message Point {
     int32 x = 1;
     int32 y = 2;
   }
+
+  string id = 17;
+  string name = 18;
 
   string user_id = 2;
   Team team = 3;
@@ -150,11 +149,13 @@ message Player {
   Point stream_screen_coordinates = 13;
   int64 stream_delay_ms = 14;
   int64 stream_sync_start_ms = 15;
+
+  ClientTypes client_type = 16;
 }
 
 message Match {
   string guid = 1;
-  repeated Player players = 2;
+  repeated User associated_users = 2;
   User leader = 3;
   PreviewBeatmapLevel selected_level = 5;
   Characteristic selected_characteristic = 6;
@@ -187,8 +188,7 @@ message CoreServer {
 
 message State {
   ServerSettings server_settings = 1;
-  repeated Player players = 2;
-  repeated Coordinator coordinators = 3;
+  repeated User users = 2;
   repeated Match matches = 4;
   repeated QualifierEvent events = 5;
   repeated CoreServer known_hosts = 6;

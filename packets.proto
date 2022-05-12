@@ -29,13 +29,7 @@ message Command {
 }
 
 message Connect {
-  enum ConnectTypes {
-    Player = 0;
-    Coordinator = 1;
-    TemporaryConnection = 2;
-  }
-
-  ConnectTypes client_type = 1;
+  models.User.ClientTypes client_type = 1;
   string name = 2;
   string password = 3;
   string user_id = 4;
@@ -77,24 +71,16 @@ message LoadedSong {
 }
 
 message Event {
-  message PlayerAddedEvent {
-    models.Player player = 1;
+  message UserAddedEvent {
+    models.User user = 1;
   }
 
-  message PlayerUpdatedEvent {
-    models.Player player = 1;
+  message UserUpdatedEvent {
+    models.User user = 1;
   }
 
-  message PlayerLeftEvent {
-    models.Player player = 1;
-  }
-
-  message CoordinatorAddedEvent {
-    models.Coordinator coordinator = 1;
-  }
-
-  message CoordinatorLeftEvent {
-    models.Coordinator coordinator = 1;
+  message UserLeftEvent {
+    models.User user = 1;
   }
 
   message MatchCreatedEvent {
@@ -130,11 +116,9 @@ message Event {
   }
 
   oneof changed_object {
-    PlayerAddedEvent player_added_event = 1;
-    PlayerUpdatedEvent player_updated_event = 2;
-    PlayerLeftEvent player_left_event = 3;
-    CoordinatorAddedEvent coordinator_added_event = 4;
-    CoordinatorLeftEvent coordinator_left_event = 5;
+    UserAddedEvent user_added_event = 1;
+    UserUpdatedEvent user_updated_event = 2;
+    UserLeftEvent user_left_event = 3;
     MatchCreatedEvent match_created_event = 6;
     MatchUpdatedEvent match_updated_event = 7;
     MatchDeletedEvent match_deleted_event = 8;
@@ -172,7 +156,7 @@ message SongFinished {
     Quit = 2;
   }
 
-  models.Player player = 1;
+  models.User player = 1;
   models.Beatmap beatmap = 2;
   CompletionType type = 3;
   int32 score = 4;
