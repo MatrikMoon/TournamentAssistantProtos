@@ -6,68 +6,161 @@ option csharp_namespace = "TournamentAssistantShared.Models.Packets";
 import "discord.proto";
 import "models.proto";
 
+
+// ---- Commands (DO something!) ---- //
+message Command {
+  message LoadSong {
+    string level_id = 1;
+    string custom_host_url = 2;
+  }
+
+  message PlaySong {
+    models.GameplayParameters gameplay_parameters = 1;
+    bool floating_scoreboard = 3;
+    bool stream_sync = 4;
+    bool disable_fail = 5;
+    bool disable_pause = 6;
+    bool disable_scoresaber_submission = 7;
+    bool show_normal_notes_on_stream = 8;
+  }
+
+  message SendBotMessage {
+    discord.Channel channel = 1;
+    string message = 2;
+  }
+
+  message ShowModal {
+    string modal_id = 1;
+    string message_title = 2;
+    string message_text = 3;
+    bool can_close = 4;
+    models.ModalOption option_1 = 5;
+    models.ModalOption option_2 = 6;
+  }
+
+  oneof type {
+    bool heartbeat = 1; //Is this really a command?
+    bool return_to_menu = 2;
+    bool delay_test_finish = 3;
+    bool stream_sync_show_image = 4;
+    LoadSong load_song = 5;
+    PlaySong play_song = 6;
+    SendBotMessage send_bot_message = 7;
+    ShowModal show_modal = 8;
+  }
+}
+
+// ---- Pushes (SUBMIT something!) ---- //\\
+message Push {
+  message QualifierScore {
+    models.LeaderboardScore score = 1;
+  }
+
+  message SongFinished {
+    enum CompletionType {
+      Passed = 0;
+      Failed = 1;
+      Quit = 2;
+    }
+
+    models.User player = 1;
+    models.Beatmap beatmap = 2;
+    CompletionType type = 3;
+    int32 score = 4;
+  }
+
+  oneof data {
+    QualifierScore qualifier_score = 1;
+    SongFinished final_score = 2;
+  }
+}
+
+// ---- Requests (GET (or do?) something where you need a response!) ---- //
+message Request {
+  message Connect {
+    models.User user = 1;
+    string password = 2;
+    int32 client_version = 3;
+  }
+
+  message Score {
+    string event_id = 1;
+    models.GameplayParameters parameters = 2;
+  }
+
+  message PreloadImageForStreamSync {
+    string file_id = 1;
+    bool compressed = 2;
+    bytes data = 3;
+  }
+
+  oneof type {
+    Connect connect = 1;
+    Score score = 2;
+    PreloadImageForStreamSync preload_image_for_stream_sync = 3;
+  }
+}
+
+// ---- Responses ---- //
+message Response {
+  enum ResponseType {
+    Fail = 0;
+    Success = 1;
+  }
+  
+  message Connect {
+    models.State state = 1;
+    string self_guid = 2;
+    int32 server_version = 3;
+    string message = 4;
+  }
+
+  message Score {
+    repeated models.LeaderboardScore scores = 1;
+  }
+
+  message LoadedSong {
+    models.PreviewBeatmapLevel level = 1;
+  }
+
+  message Modal {
+      string modal_id = 1;
+      string value = 2;
+  }
+
+  message ModifyQualifier {
+    string message = 1;
+  }
+
+  message ImagePreloaded {
+    string file_id = 1;
+  }
+
+  ResponseType type = 1;
+  string responding_to_packet_id = 2;
+  oneof details {
+    Connect connect = 3;
+    Score score = 4;
+    LoadedSong loaded_song = 5;
+    Modal modal = 6;
+    ModifyQualifier modify_qualifier = 7;
+    ImagePreloaded image_preloaded = 8;
+  }
+}
+
+// ---- Backbone ---- //
 message Acknowledgement {
   enum AcknowledgementType {
     MessageReceived = 0;
-    FileDownloaded = 1;
   }
 
   string packet_id = 1;
   AcknowledgementType type = 2;
 }
 
-message Command {
-  enum CommandTypes {
-    Heartbeat = 0;
-    ReturnToMenu = 1;
-    ScreenOverlay_ShowPng = 2;
-    ScreenOverlay_ShowGreen = 3;
-    DelayTest_Finish = 4;
-  }
-
-  CommandTypes command_type = 1;
-}
-
-message Connect {
-  models.User.ClientTypes client_type = 1;
-  string name = 2;
-  string password = 3;
-  string user_id = 4;
-  int32 client_version = 5;
-}
-
-message Response {
-  enum ResponseType {
-    Fail = 0;
-    Success = 1;
-  }
-
-  ResponseType type = 1;
-  string message = 2;
-}
-
-message ConnectResponse {
-  Response response = 1;
-  models.User self = 2;
-  models.State state = 3;
-  int32 server_version = 4;
-}
-
-message File {
-  enum Intentions {
-    None = 0;
-    SetPngToShowWhenTriggered = 1; //Image will be stored in the StreamSyncController and displayed when the DelayTest_Trigger command is received
-    ShowPngImmediately = 2; //Image will be immediately displayed if the StreamSyncController is active
-  }
-
-  string file_id = 1;
-  Intentions intent = 2;
-  bool compressed = 3;
-  bytes data = 4;
-}
-
-message LoadedSong {
-  models.PreviewBeatmapLevel level = 1;
+message ForwardingPacket {
+  repeated string forward_to = 1;
+  Packet packet = 2;
 }
 
 message Event {
@@ -130,92 +223,16 @@ message Event {
   }
 }
 
-message LoadSong {
-  string level_id = 1;
-  string custom_host_url = 2;
-}
-
-message PlaySong {
-  models.GameplayParameters gameplay_parameters = 1;
-  bool floating_scoreboard = 3;
-  bool stream_sync = 4;
-  bool disable_fail = 5;
-  bool disable_pause = 6;
-  bool disable_scoresaber_submission = 7;
-  bool show_normal_notes_on_stream = 8;
-}
-
-message SubmitScore {
-  models.Score score = 1;
-}
-
-message SongFinished {
-  enum CompletionType {
-    Passed = 0;
-    Failed = 1;
-    Quit = 2;
-  }
-
-  models.User player = 1;
-  models.Beatmap beatmap = 2;
-  CompletionType type = 3;
-  int32 score = 4;
-}
-
-message SendBotMessage {
-  discord.Channel channel = 1;
-  string message = 2;
-}
-
-message ScoreRequestResponse {
-  repeated models.Score scores = 1;
-}
-
-message ScoreRequest {
-  string event_id = 1;
-  models.GameplayParameters parameters = 2;
-}
-
 message Packet {
   string id = 1;
   string from = 2;
   oneof packet {
     Acknowledgement acknowledgement = 3;
-    Command command = 4;
-    Connect connect = 5;
-    Response response = 6;
-    ConnectResponse connect_response = 7;
-    File file = 8;
-    LoadedSong loaded_song = 9;
-    Event event = 10;
-    LoadSong load_song = 11;
-    PlaySong play_song = 12;
-    SubmitScore submit_score = 13;
-    SongFinished song_finished = 14;
-    SendBotMessage send_bot_message = 15;
-    ScoreRequestResponse score_request_response = 16;
-    ScoreRequest score_request = 17;
-    ForwardingPacket forwarding_packet = 18;
-    Message message = 19;
-    MessageResponse message_response = 20;
+    ForwardingPacket forwarding_packet = 4;
+    Command command = 5;
+    Push push = 6;
+    Request request = 7;
+    Response response = 8;
+    Event event = 9;
   }
-}
-
-message ForwardingPacket {
-  repeated string forward_to = 1;
-  Packet packet = 2;
-}
-
-message Message {
-    string id = 1;
-    string message_title = 2;
-    string message_text = 3;
-    bool can_close = 4;
-    models.MessageOption option_1 = 5;
-    models.MessageOption option_2 = 6;
-}
-
-message MessageResponse {
-    string packet_id = 1;
-    string value = 2;
 }

@@ -194,7 +194,7 @@ message State {
   repeated CoreServer known_hosts = 6;
 }
 
-message Score {
+message LeaderboardScore {
   string event_id = 1;
   GameplayParameters parameters = 2;
   string user_id = 3;
@@ -204,7 +204,14 @@ message Score {
   string color = 7;
 }
 
-message MessageOption {
-    string label = 1;
-    string value = 2;
+message RealtimeScore {
+  int32 score = 1;
+  int32 combo = 2;
+  bool is_miss = 3;
+  bool is_bad_hit = 4;
+}
+
+message ModalOption {
+  string label = 1;
+  string value = 2;
 }
