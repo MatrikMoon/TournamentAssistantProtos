@@ -50,10 +50,24 @@ message Command {
   }
 }
 
-// ---- Pushes (SUBMIT something!) ---- //\\
+// ---- Pushes (SUBMIT something!) ---- //
 message Push {
-  message QualifierScore {
+  message LeaderboardScore {
     models.LeaderboardScore score = 1;
+  }
+
+  message RealtimeScore {
+    int32 score = 1;
+    int32 score_with_modifiers = 2;
+    int32 max_score = 3;
+    int32 max_score_with_modifiers = 4;
+    int32 combo = 5;
+    int32 misses = 6;
+    int32 player_health = 7;
+    float accuracy = 8;
+    bool is_miss = 9;
+    bool is_bad_hit = 10;
+    float song_position = 11;
   }
 
   message SongFinished {
@@ -70,8 +84,9 @@ message Push {
   }
 
   oneof data {
-    QualifierScore qualifier_score = 1;
-    SongFinished final_score = 2;
+    LeaderboardScore leaderboard_score = 1;
+    RealtimeScore realtime_score = 2;
+    SongFinished song_finished = 3;
   }
 }
 
@@ -83,7 +98,7 @@ message Request {
     int32 client_version = 3;
   }
 
-  message Score {
+  message LeaderboardScore {
     string event_id = 1;
     models.GameplayParameters parameters = 2;
   }
@@ -96,7 +111,7 @@ message Request {
 
   oneof type {
     Connect connect = 1;
-    Score score = 2;
+    LeaderboardScore leaderboard_score = 2;
     PreloadImageForStreamSync preload_image_for_stream_sync = 3;
   }
 }
@@ -115,7 +130,7 @@ message Response {
     string message = 4;
   }
 
-  message Score {
+  message LeaderboardScores {
     repeated models.LeaderboardScore scores = 1;
   }
 
@@ -140,7 +155,7 @@ message Response {
   string responding_to_packet_id = 2;
   oneof details {
     Connect connect = 3;
-    Score score = 4;
+    LeaderboardScores leaderboard_scores = 4;
     LoadedSong loaded_song = 5;
     Modal modal = 6;
     ModifyQualifier modify_qualifier = 7;
