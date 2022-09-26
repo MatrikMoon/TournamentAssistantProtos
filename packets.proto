@@ -57,17 +57,18 @@ message Push {
   }
 
   message RealtimeScore {
-    int32 score = 1;
-    int32 score_with_modifiers = 2;
-    int32 max_score = 3;
-    int32 max_score_with_modifiers = 4;
-    int32 combo = 5;
-    int32 misses = 6;
-    int32 player_health = 7;
-    float accuracy = 8;
-    bool is_miss = 9;
-    bool is_bad_hit = 10;
-    float song_position = 11;
+    string user_guid = 1;
+    int32 score = 2;
+    int32 score_with_modifiers = 3;
+    int32 max_score = 4;
+    int32 max_score_with_modifiers = 5;
+    int32 combo = 6;
+    int32 misses = 7;
+    float player_health = 8;
+    float accuracy = 9;
+    bool is_miss = 10;
+    bool is_bad_hit = 11;
+    float song_position = 12;
   }
 
   message SongFinished {
