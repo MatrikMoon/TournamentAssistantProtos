@@ -200,3 +200,20 @@ message ModalOption {
   string label = 1;
   string value = 2;
 }
+
+message ScoreTrackerHand {
+  int32 hit = 1;
+  int32 miss = 2;
+  int32 badCut = 3;
+  repeated float avgCut = 4;
+}
+
+message ScoreTracker {
+  int32 notesMissed = 1;
+  int32 badCuts = 2;
+  int32 bombHits = 3;
+  int32 wallHits = 4;
+  int32 maxCombo = 5;
+  ScoreTrackerHand leftHand = 6;
+  ScoreTrackerHand rightHand = 7;
+}
