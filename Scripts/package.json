@@ -3,6 +3,6 @@
     "version": "1.0.0",
     "description": "Contains proto definitions and tools to use with protoc",
     "dependencies": {
-        "protoc-gen-ts": "^0.8.5"
+        "@protobuf-ts/plugin": "^2.8.0"
     }
 }
