@@ -121,12 +121,18 @@ message Response {
     Fail = 0;
     Success = 1;
   }
+
+  enum ConnectFailReason {
+    IncorrectVersion = 0;
+    IncorrectPassword = 1;
+  }
   
   message Connect {
     models.State state = 1;
     string self_guid = 2;
     int32 server_version = 3;
     string message = 4;
+    ConnectFailReason reason = 5;
   }
 
   message LeaderboardScores {
