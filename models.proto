@@ -186,6 +186,11 @@ message State {
   repeated CoreServer known_hosts = 6;
 }
 
+message ModalOption {
+  string label = 1;
+  string value = 2;
+}
+
 message LeaderboardScore {
   string event_id = 1;
   GameplayParameters parameters = 2;
@@ -196,24 +201,28 @@ message LeaderboardScore {
   string color = 7;
 }
 
-message ModalOption {
-  string label = 1;
-  string value = 2;
-}
+message RealtimeScore {
+    string user_guid = 1;
+    int32 score = 2;
+    int32 score_with_modifiers = 3;
+    int32 max_score = 4;
+    int32 max_score_with_modifiers = 5;
+    int32 combo = 6;
+    float player_health = 7;
+    float accuracy = 8;
+    float song_position = 9;
+    int32 notesMissed = 10;
+    int32 badCuts = 11;
+    int32 bombHits = 12;
+    int32 wallHits = 13;
+    int32 maxCombo = 14;
+    models.ScoreTrackerHand leftHand = 15;
+    models.ScoreTrackerHand rightHand = 16;
+  }
 
 message ScoreTrackerHand {
   int32 hit = 1;
   int32 miss = 2;
   int32 badCut = 3;
   repeated float avgCut = 4;
-}
-
-message ScoreTracker {
-  int32 notesMissed = 1;
-  int32 badCuts = 2;
-  int32 bombHits = 3;
-  int32 wallHits = 4;
-  int32 maxCombo = 5;
-  ScoreTrackerHand leftHand = 6;
-  ScoreTrackerHand rightHand = 7;
 }

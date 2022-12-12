@@ -52,23 +52,6 @@ message Command {
 
 // ---- Pushes (SUBMIT something!) ---- //
 message Push {
-  message LeaderboardScore {
-    models.LeaderboardScore score = 1;
-  }
-
-  message RealtimeScore {
-    string user_guid = 1;
-    int32 score = 2;
-    int32 score_with_modifiers = 3;
-    int32 max_score = 4;
-    int32 max_score_with_modifiers = 5;
-    int32 combo = 6;
-    float player_health = 7;
-    float accuracy = 8;
-    float song_position = 9;
-    models.ScoreTracker scoreTracker = 10;
-  }
-
   message SongFinished {
     enum CompletionType {
       Passed = 0;
@@ -83,8 +66,8 @@ message Push {
   }
 
   oneof data {
-    LeaderboardScore leaderboard_score = 1;
-    RealtimeScore realtime_score = 2;
+    models.LeaderboardScore leaderboard_score = 1;
+    models.RealtimeScore realtime_score = 2;
     SongFinished song_finished = 3;
   }
 }
