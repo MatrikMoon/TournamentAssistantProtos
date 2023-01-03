@@ -183,7 +183,7 @@ message State {
   repeated User users = 2;
   repeated Match matches = 4;
   repeated QualifierEvent events = 5;
-  repeated CoreServer known_hosts = 6;
+  repeated CoreServer known_servers = 6;
 }
 
 message ModalOption {

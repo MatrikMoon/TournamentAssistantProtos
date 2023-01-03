@@ -47,6 +47,7 @@ message Command {
     PlaySong play_song = 6;
     SendBotMessage send_bot_message = 7;
     ShowModal show_modal = 8;
+    string discord_authorize = 9;
   }
 }
 
@@ -65,10 +66,15 @@ message Push {
     int32 score = 4;
   }
 
+  message DiscordAuthorized {
+    bool success = 1;
+  }
+
   oneof data {
     models.LeaderboardScore leaderboard_score = 1;
     models.RealtimeScore realtime_score = 2;
     SongFinished song_finished = 3;
+    DiscordAuthorized discord_authorized = 4;
   }
 }
 
@@ -203,11 +209,11 @@ message Event {
     models.QualifierEvent event = 1;
   }
 
-  message HostAddedEvent {
+  message ServerAddedEvent {
     models.CoreServer server = 1;
   }
 
-  message HostDeletedEvent {
+  message ServerDeletedEvent {
     models.CoreServer server = 1;
   }
 
@@ -221,8 +227,8 @@ message Event {
     QualifierCreatedEvent qualifier_created_event = 9;
     QualifierUpdatedEvent qualifier_updated_event = 10;
     QualifierDeletedEvent qualifier_deleted_event = 11;
-    HostAddedEvent host_added_event = 12;
-    HostDeletedEvent host_deleted_event = 13;
+    ServerAddedEvent server_added_event = 12;
+    ServerDeletedEvent server_deleted_event = 13;
   }
 }
 
