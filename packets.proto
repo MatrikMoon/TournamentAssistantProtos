@@ -82,8 +82,13 @@ message Push {
 message Request {
   message Connect {
     models.User user = 1;
-    string password = 2;
-    int32 client_version = 3;
+    int32 client_version = 2;
+  }
+
+  message JoinTournament {
+    models.User user = 1;
+    string tournament_id = 2;
+    string password = 3;
   }
 
   message LeaderboardScore {
@@ -99,8 +104,9 @@ message Request {
 
   oneof type {
     Connect connect = 1;
-    LeaderboardScore leaderboard_score = 2;
-    PreloadImageForStreamSync preload_image_for_stream_sync = 3;
+    JoinTournament join_tournament = 2;
+    LeaderboardScore leaderboard_score = 3;
+    PreloadImageForStreamSync preload_image_for_stream_sync = 4;
   }
 }
 
@@ -113,7 +119,10 @@ message Response {
 
   enum ConnectFailReason {
     IncorrectVersion = 0;
-    IncorrectPassword = 1;
+  }
+
+  enum JoinTournamentFailReason {
+    IncorrectPassword = 0;
   }
   
   message Connect {
@@ -122,6 +131,11 @@ message Response {
     int32 server_version = 3;
     string message = 4;
     ConnectFailReason reason = 5;
+  }
+
+  message JoinTournament {
+    string message = 1;
+    ConnectFailReason reason = 2;
   }
 
   message LeaderboardScores {
@@ -149,11 +163,12 @@ message Response {
   string responding_to_packet_id = 2;
   oneof details {
     Connect connect = 3;
-    LeaderboardScores leaderboard_scores = 4;
-    LoadedSong loaded_song = 5;
-    Modal modal = 6;
-    ModifyQualifier modify_qualifier = 7;
-    ImagePreloaded image_preloaded = 8;
+    JoinTournament join_tournament = 4;
+    LeaderboardScores leaderboard_scores = 5;
+    LoadedSong loaded_song = 6;
+    Modal modal = 7;
+    ModifyQualifier modify_qualifier = 8;
+    ImagePreloaded image_preloaded = 9;
   }
 }
 
@@ -174,39 +189,48 @@ message ForwardingPacket {
 
 message Event {
   message UserAddedEvent {
-    models.User user = 1;
+    string tournament_guid = 1;
+    models.User user = 2;
   }
 
   message UserUpdatedEvent {
-    models.User user = 1;
+    string tournament_guid = 1;
+    models.User user = 2;
   }
 
   message UserLeftEvent {
-    models.User user = 1;
+    string tournament_guid = 1;
+    models.User user = 2;
   }
 
   message MatchCreatedEvent {
-    models.Match match = 1;
+    string tournament_guid = 1;
+    models.Match match = 2;
   }
 
   message MatchUpdatedEvent {
-    models.Match match = 1;
+    string tournament_guid = 1;
+    models.Match match = 2;
   }
 
   message MatchDeletedEvent {
-    models.Match match = 1;
+    string tournament_guid = 1;
+    models.Match match = 2;
   }
 
   message QualifierCreatedEvent {
-    models.QualifierEvent event = 1;
+    string tournament_guid = 1;
+    models.QualifierEvent event = 2;
   }
 
   message QualifierUpdatedEvent {
-    models.QualifierEvent event = 1;
+    string tournament_guid = 1;
+    models.QualifierEvent event = 2;
   }
 
   message QualifierDeletedEvent {
-    models.QualifierEvent event = 1;
+    string tournament_guid = 1;
+    models.QualifierEvent event = 2;
   }
 
   message ServerAddedEvent {

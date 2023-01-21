@@ -92,17 +92,8 @@ message GameplayParameters {
 }
 
 message Team {
-  string id = 1;
+  string guid = 1;
   string name = 2;
-}
-
-message ServerSettings {
-  string server_name = 1;
-  string password = 2;
-  bool enable_teams = 3;
-  repeated Team teams = 4;
-  int32 score_update_frequency = 5;
-  repeated string banned_mods = 6;
 }
 
 message SongList {
@@ -126,6 +117,11 @@ message User {
     TemporaryConnection = 2;
     WebsocketConnection = 3;
   }
+  message DiscordInfo {
+    string user_id = 1;
+    string username = 2;
+    string avatar_url = 3;
+  }
 
   message Point {
     int32 x = 1;
@@ -143,6 +139,8 @@ message User {
   Point stream_screen_coordinates = 9;
   int64 stream_delay_ms = 10;
   int64 stream_sync_start_ms = 11;
+  DiscordInfo discord_info = 12;
+  bytes user_image = 13;
 }
 
 message Match {
@@ -178,12 +176,26 @@ message CoreServer {
   int32 port = 3;
 }
 
-message State {
-  ServerSettings server_settings = 1;
-  repeated User users = 2;
+message Tournament {
+  message TournamentSettings {
+    string tournament_name = 1;
+    bytes tournament_image = 2;
+    bool enable_teams = 3;
+    repeated Team teams = 4;
+    int32 score_update_frequency = 5;
+    repeated string banned_mods = 6;
+  }
+
+  string guid = 1;
+  TournamentSettings settings = 2;
+  repeated User users = 3;
   repeated Match matches = 4;
-  repeated QualifierEvent events = 5;
-  repeated CoreServer known_servers = 6;
+  repeated QualifierEvent qualifiers = 5;
+}
+
+message State {
+  repeated Tournament tournaments = 1;
+  repeated CoreServer known_servers = 2;
 }
 
 message ModalOption {
