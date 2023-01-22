@@ -80,12 +80,11 @@ message Push {
 
 // ---- Requests (GET (or do?) something where you need a response!) ---- //
 message Request {
-  message Connect {
-    models.User user = 1;
-    int32 client_version = 2;
+  message Info {
+    int32 client_version = 1;
   }
 
-  message JoinTournament {
+  message Connect {
     models.User user = 1;
     string tournament_id = 2;
     string password = 3;
@@ -104,7 +103,7 @@ message Request {
 
   oneof type {
     Connect connect = 1;
-    JoinTournament join_tournament = 2;
+    Info info = 2;
     LeaderboardScore leaderboard_score = 3;
     PreloadImageForStreamSync preload_image_for_stream_sync = 4;
   }
@@ -117,25 +116,26 @@ message Response {
     Success = 1;
   }
 
-  enum ConnectFailReason {
+  enum InfoFailReason {
     IncorrectVersion = 0;
   }
 
-  enum JoinTournamentFailReason {
+  enum ConnectFailReason {
     IncorrectPassword = 0;
+  }
+  
+  message Info {
+    models.State state = 1;
+    int32 server_version = 2;
+    string message = 3;
+    InfoFailReason reason = 4;
   }
   
   message Connect {
     models.State state = 1;
     string self_guid = 2;
-    int32 server_version = 3;
-    string message = 4;
-    ConnectFailReason reason = 5;
-  }
-
-  message JoinTournament {
-    string message = 1;
-    ConnectFailReason reason = 2;
+    string message = 3;
+    ConnectFailReason reason = 4;
   }
 
   message LeaderboardScores {
@@ -155,6 +155,10 @@ message Response {
     string message = 1;
   }
 
+  message ModifyTournament {
+    string message = 1;
+  }
+
   message ImagePreloaded {
     string file_id = 1;
   }
@@ -163,12 +167,13 @@ message Response {
   string responding_to_packet_id = 2;
   oneof details {
     Connect connect = 3;
-    JoinTournament join_tournament = 4;
+    Info info = 4;
     LeaderboardScores leaderboard_scores = 5;
     LoadedSong loaded_song = 6;
     Modal modal = 7;
     ModifyQualifier modify_qualifier = 8;
-    ImagePreloaded image_preloaded = 9;
+    ModifyTournament modify_tournament = 9;
+    ImagePreloaded image_preloaded = 10;
   }
 }
 
@@ -188,71 +193,86 @@ message ForwardingPacket {
 }
 
 message Event {
-  message UserAddedEvent {
+  message UserAdded {
     string tournament_guid = 1;
     models.User user = 2;
   }
 
-  message UserUpdatedEvent {
+  message UserUpdated {
     string tournament_guid = 1;
     models.User user = 2;
   }
 
-  message UserLeftEvent {
+  message UserLeft {
     string tournament_guid = 1;
     models.User user = 2;
   }
 
-  message MatchCreatedEvent {
+  message MatchCreated {
     string tournament_guid = 1;
     models.Match match = 2;
   }
 
-  message MatchUpdatedEvent {
+  message MatchUpdated {
     string tournament_guid = 1;
     models.Match match = 2;
   }
 
-  message MatchDeletedEvent {
+  message MatchDeleted {
     string tournament_guid = 1;
     models.Match match = 2;
   }
 
-  message QualifierCreatedEvent {
+  message QualifierCreated {
     string tournament_guid = 1;
     models.QualifierEvent event = 2;
   }
 
-  message QualifierUpdatedEvent {
+  message QualifierUpdated {
     string tournament_guid = 1;
     models.QualifierEvent event = 2;
   }
 
-  message QualifierDeletedEvent {
+  message QualifierDeleted {
     string tournament_guid = 1;
     models.QualifierEvent event = 2;
   }
 
-  message ServerAddedEvent {
+  message TournamentCreated {
+    models.Tournament tournament = 1;
+  }
+
+  message TournamentUpdated {
+    models.Tournament tournament = 1;
+  }
+
+  message TournamentDeleted {
+    models.Tournament tournament = 1;
+  }
+
+  message ServerAdded {
     models.CoreServer server = 1;
   }
 
-  message ServerDeletedEvent {
+  message ServerDeleted {
     models.CoreServer server = 1;
   }
 
   oneof changed_object {
-    UserAddedEvent user_added_event = 1;
-    UserUpdatedEvent user_updated_event = 2;
-    UserLeftEvent user_left_event = 3;
-    MatchCreatedEvent match_created_event = 6;
-    MatchUpdatedEvent match_updated_event = 7;
-    MatchDeletedEvent match_deleted_event = 8;
-    QualifierCreatedEvent qualifier_created_event = 9;
-    QualifierUpdatedEvent qualifier_updated_event = 10;
-    QualifierDeletedEvent qualifier_deleted_event = 11;
-    ServerAddedEvent server_added_event = 12;
-    ServerDeletedEvent server_deleted_event = 13;
+    UserAdded user_added = 1;
+    UserUpdated user_updated = 2;
+    UserLeft user_left = 3;
+    MatchCreated match_created = 6;
+    MatchUpdated match_updated = 7;
+    MatchDeleted match_deleted = 8;
+    QualifierCreated qualifier_created = 9;
+    QualifierUpdated qualifier_updated = 10;
+    QualifierDeleted qualifier_deleted = 11;
+    TournamentCreated tournament_created = 12;
+    TournamentUpdated tournament_updated = 13;
+    TournamentDeleted tournament_deleted = 14;
+    ServerAdded server_added = 15;
+    ServerDeleted server_deleted = 16;
   }
 }
 
