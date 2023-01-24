@@ -80,11 +80,11 @@ message Push {
 
 // ---- Requests (GET (or do?) something where you need a response!) ---- //
 message Request {
-  message Info {
+  message Connect {
     int32 client_version = 1;
   }
 
-  message Connect {
+  message Join {
     models.User user = 1;
     string tournament_id = 2;
     string password = 3;
@@ -103,7 +103,7 @@ message Request {
 
   oneof type {
     Connect connect = 1;
-    Info info = 2;
+    Join join = 2;
     LeaderboardScore leaderboard_score = 3;
     PreloadImageForStreamSync preload_image_for_stream_sync = 4;
   }
@@ -116,26 +116,26 @@ message Response {
     Success = 1;
   }
 
-  enum InfoFailReason {
+  enum ConnectFailReason {
     IncorrectVersion = 0;
   }
 
-  enum ConnectFailReason {
+  enum JoinFailReason {
     IncorrectPassword = 0;
-  }
-  
-  message Info {
-    models.State state = 1;
-    int32 server_version = 2;
-    string message = 3;
-    InfoFailReason reason = 4;
   }
   
   message Connect {
     models.State state = 1;
-    string self_guid = 2;
+    int32 server_version = 2;
     string message = 3;
     ConnectFailReason reason = 4;
+  }
+  
+  message Join {
+    models.State state = 1;
+    string self_guid = 2;
+    string message = 3;
+    JoinFailReason reason = 4;
   }
 
   message LeaderboardScores {
@@ -167,7 +167,7 @@ message Response {
   string responding_to_packet_id = 2;
   oneof details {
     Connect connect = 3;
-    Info info = 4;
+    Join join = 4;
     LeaderboardScores leaderboard_scores = 5;
     LoadedSong loaded_song = 6;
     Modal modal = 7;
