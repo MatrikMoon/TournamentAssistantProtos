@@ -68,6 +68,7 @@ message Push {
 
   message DiscordAuthorized {
     bool success = 1;
+    string token = 2;
   }
 
   oneof data {
@@ -277,15 +278,16 @@ message Event {
 }
 
 message Packet {
-  string id = 1;
-  string from = 2;
+  string token = 1;
+  string id = 2;
+  string from = 3;
   oneof packet {
-    Acknowledgement acknowledgement = 3;
-    ForwardingPacket forwarding_packet = 4;
-    Command command = 5;
-    Push push = 6;
-    Request request = 7;
-    Response response = 8;
-    Event event = 9;
+    Acknowledgement acknowledgement = 4;
+    ForwardingPacket forwarding_packet = 5;
+    Command command = 6;
+    Push push = 7;
+    Request request = 8;
+    Response response = 9;
+    Event event = 10;
   }
 }
