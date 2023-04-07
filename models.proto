@@ -113,8 +113,8 @@ message User {
   }
   enum ClientTypes {
     Player = 0;
-    Coordinator = 1;
-    TemporaryConnection = 2;
+    Coordinator = 1; //TODO: Is this still used?
+    TemporaryConnection = 2; //TODO: Is this still used?
     WebsocketConnection = 3;
   }
   message DiscordInfo {
