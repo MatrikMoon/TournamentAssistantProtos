@@ -71,11 +71,21 @@ message PlayerSpecificSettings {
     AutoRestart = 128;
     HideNoteSpawnEffect = 256;
     AdaptiveSfx = 512;
+    ArcsHapticFeedback = 1024;
   }
+
   enum NoteJumpDurationTypeSettings {
     Dynamic = 0;
     Static = 1;
   }
+
+  enum ArcVisibilityType {
+    None = 0;
+    Low = 1;
+    Standard = 2;
+    High = 3;
+  }
+
   float player_height = 1;
   float sfx_volume = 2;
   float saber_trail_intensity = 3;
@@ -83,6 +93,7 @@ message PlayerSpecificSettings {
   float note_jump_fixed_duration = 5;
   PlayerOptions options = 6;
   NoteJumpDurationTypeSettings note_jump_duration_type_settings = 7;
+  ArcVisibilityType arc_visibility_type = 8;
 }
 
 message GameplayParameters {
@@ -105,18 +116,21 @@ message User {
     Waiting = 0;
     InGame = 1;
   }
+
   enum DownloadStates {
     None = 0;
     Downloading = 1;
     Downloaded = 2;
     DownloadError = 3;
   }
+
   enum ClientTypes {
     Player = 0;
     Coordinator = 1; //TODO: Is this still used?
     TemporaryConnection = 2; //TODO: Is this still used?
     WebsocketConnection = 3;
   }
+
   message DiscordInfo {
     string user_id = 1;
     string username = 2;
@@ -215,23 +229,23 @@ message LeaderboardScore {
 }
 
 message RealtimeScore {
-    string user_guid = 1;
-    int32 score = 2;
-    int32 score_with_modifiers = 3;
-    int32 max_score = 4;
-    int32 max_score_with_modifiers = 5;
-    int32 combo = 6;
-    float player_health = 7;
-    float accuracy = 8;
-    float song_position = 9;
-    int32 notesMissed = 10;
-    int32 badCuts = 11;
-    int32 bombHits = 12;
-    int32 wallHits = 13;
-    int32 maxCombo = 14;
-    models.ScoreTrackerHand leftHand = 15;
-    models.ScoreTrackerHand rightHand = 16;
-  }
+  string user_guid = 1;
+  int32 score = 2;
+  int32 score_with_modifiers = 3;
+  int32 max_score = 4;
+  int32 max_score_with_modifiers = 5;
+  int32 combo = 6;
+  float player_health = 7;
+  float accuracy = 8;
+  float song_position = 9;
+  int32 notesMissed = 10;
+  int32 badCuts = 11;
+  int32 bombHits = 12;
+  int32 wallHits = 13;
+  int32 maxCombo = 14;
+  models.ScoreTrackerHand leftHand = 15;
+  models.ScoreTrackerHand rightHand = 16;
+}
 
 message ScoreTrackerHand {
   int32 hit = 1;

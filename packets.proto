@@ -135,8 +135,9 @@ message Response {
   message Join {
     models.State state = 1;
     string self_guid = 2;
-    string message = 3;
-    JoinFailReason reason = 4;
+    string tournament_id = 3;
+    string message = 4;
+    JoinFailReason reason = 5;
   }
 
   message LeaderboardScores {
