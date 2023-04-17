@@ -1,5 +1,5 @@
 syntax = "proto3";
-package proto.packet;
+package proto.packets;
 
 option csharp_namespace = "TournamentAssistantShared.Models.Packets";
 
@@ -86,9 +86,8 @@ message Request {
   }
 
   message Join {
-    models.User user = 1;
-    string tournament_id = 2;
-    string password = 3;
+    string tournament_id = 1;
+    string password = 2;
   }
 
   message LeaderboardScore {
