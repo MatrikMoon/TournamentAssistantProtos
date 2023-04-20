@@ -60,7 +60,7 @@ message GameplayModifiers {
 
 message PlayerSpecificSettings {
   enum PlayerOptions {
-    None = 0;
+    NoPlayerOptions = 0;
     LeftHanded = 1;
     StaticLights = 2;
     NoHud = 4;
