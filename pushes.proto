@@ -1,0 +1,34 @@
+syntax = "proto3";
+package proto.packets;
+
+option csharp_namespace = "TournamentAssistantShared.Models.Packets";
+
+import "models.proto";
+
+// ---- Pushes (SUBMIT something!) ---- //
+message Push {
+  message SongFinished {
+    enum CompletionType {
+      Passed = 0;
+      Failed = 1;
+      Quit = 2;
+    }
+
+    models.User player = 1;
+    models.Beatmap beatmap = 2;
+    CompletionType type = 3;
+    int32 score = 4;
+  }
+
+  message DiscordAuthorized {
+    bool success = 1;
+    string token = 2;
+  }
+
+  oneof data {
+    models.LeaderboardScore leaderboard_score = 1;
+    models.RealtimeScore realtime_score = 2;
+    SongFinished song_finished = 3;
+    DiscordAuthorized discord_authorized = 4;
+  }
+}

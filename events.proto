@@ -1,0 +1,90 @@
+syntax = "proto3";
+package proto.packets;
+
+option csharp_namespace = "TournamentAssistantShared.Models.Packets";
+
+import "models.proto";
+
+message Event {
+  message UserAdded {
+    string tournament_guid = 1;
+    models.User user = 2;
+  }
+
+  message UserUpdated {
+    string tournament_guid = 1;
+    models.User user = 2;
+  }
+
+  message UserLeft {
+    string tournament_guid = 1;
+    models.User user = 2;
+  }
+
+  message MatchCreated {
+    string tournament_guid = 1;
+    models.Match match = 2;
+  }
+
+  message MatchUpdated {
+    string tournament_guid = 1;
+    models.Match match = 2;
+  }
+
+  message MatchDeleted {
+    string tournament_guid = 1;
+    models.Match match = 2;
+  }
+
+  message QualifierCreated {
+    string tournament_guid = 1;
+    models.QualifierEvent event = 2;
+  }
+
+  message QualifierUpdated {
+    string tournament_guid = 1;
+    models.QualifierEvent event = 2;
+  }
+
+  message QualifierDeleted {
+    string tournament_guid = 1;
+    models.QualifierEvent event = 2;
+  }
+
+  message TournamentCreated {
+    models.Tournament tournament = 1;
+  }
+
+  message TournamentUpdated {
+    models.Tournament tournament = 1;
+  }
+
+  message TournamentDeleted {
+    models.Tournament tournament = 1;
+  }
+
+  message ServerAdded {
+    models.CoreServer server = 1;
+  }
+
+  message ServerDeleted {
+    models.CoreServer server = 1;
+  }
+
+  oneof changed_object {
+    UserAdded user_added = 1;
+    UserUpdated user_updated = 2;
+    UserLeft user_left = 3;
+    MatchCreated match_created = 6;
+    MatchUpdated match_updated = 7;
+    MatchDeleted match_deleted = 8;
+    QualifierCreated qualifier_created = 9;
+    QualifierUpdated qualifier_updated = 10;
+    QualifierDeleted qualifier_deleted = 11;
+    TournamentCreated tournament_created = 12;
+    TournamentUpdated tournament_updated = 13;
+    TournamentDeleted tournament_deleted = 14;
+    ServerAdded server_added = 15;
+    ServerDeleted server_deleted = 16;
+  }
+}

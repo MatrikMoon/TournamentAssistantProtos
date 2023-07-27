@@ -1,0 +1,122 @@
+syntax = "proto3";
+package proto.packets;
+
+option csharp_namespace = "TournamentAssistantShared.Models.Packets";
+
+import "models.proto";
+
+// ---- Requests (GET (or do?) something where you need a response!) ---- //
+message Request {
+  message Connect {
+    int32 client_version = 1;
+  }
+
+  message Join {
+    string tournament_id = 1;
+    string password = 2;
+  }
+
+  message LeaderboardScore {
+    string event_id = 1;
+    models.GameplayParameters parameters = 2;
+  }
+
+  message LoadSong {
+    string level_id = 1;
+    string custom_host_url = 2;
+  }
+
+  message PreloadImageForStreamSync {
+    string file_id = 1;
+    bool compressed = 2;
+    bytes data = 3;
+  }
+
+  message ShowModal {
+    string modal_id = 1;
+    string message_title = 2;
+    string message_text = 3;
+    bool can_close = 4;
+    models.ModalOption option_1 = 5;
+    models.ModalOption option_2 = 6;
+  }
+
+  //--- State Update Requests ---//
+  message UpdateUser {
+    string tournamentId = 1;
+    models.User user = 2;
+  }
+
+  message CreateMatch {
+    string tournamentId = 1;
+    models.Match match = 2;
+  }
+
+  message UpdateMatch {
+    string tournamentId = 1;
+    models.Match match = 2;
+  }
+
+  message DeleteMatch {
+    string tournamentId = 1;
+    models.Match match = 2;
+  }
+
+  message CreateQualifierEvent {
+    string tournamentId = 1;
+    models.QualifierEvent event = 2;
+  }
+
+  message UpdateQualifierEvent {
+    string tournamentId = 1;
+    models.QualifierEvent event = 2;
+  }
+
+  message DeleteQualifierEvent {
+    string tournamentId = 1;
+    models.QualifierEvent event = 2;
+  }
+
+  message CreateTournament {
+    models.Tournament tournament = 1;
+  }
+
+  message UpdateTournament {
+    models.Tournament tournament = 1;
+  }
+
+  message DeleteTournament {
+    models.Tournament tournament = 1;
+  }
+
+  message AddServer {
+    models.CoreServer server = 1;
+    string auth_token = 2;
+  }
+
+  // Probably not needed? If someone wants to remove their server from the list, they can just shut it down
+  // message DeleteServer {
+  //   models.CoreServer server = 1;
+  //   string auth_token = 2;
+  // }
+
+  oneof type {
+    Connect connect = 1;
+    Join join = 2;
+    LeaderboardScore leaderboard_score = 3;
+    LoadSong load_song = 4;
+    PreloadImageForStreamSync preload_image_for_stream_sync = 5;
+    ShowModal show_modal = 6;
+    UpdateUser update_user = 7;
+    CreateMatch create_match = 8;
+    UpdateMatch update_match = 9;
+    DeleteMatch delete_match = 10;
+    CreateQualifierEvent create_qualifier_event = 11;
+    UpdateQualifierEvent update_qualifier_event = 12;
+    DeleteQualifierEvent delete_qualifier_event = 13;
+    CreateTournament create_tournament = 14;
+    UpdateTournament update_tournament = 15;
+    DeleteTournament delete_tournament = 16;
+    AddServer add_server = 17;
+  }
+}

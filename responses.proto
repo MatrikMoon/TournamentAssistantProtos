@@ -1,0 +1,121 @@
+syntax = "proto3";
+package proto.packets;
+
+option csharp_namespace = "TournamentAssistantShared.Models.Packets";
+
+import "models.proto";
+
+// ---- Responses ---- //
+message Response {
+  enum ResponseType {
+    Fail = 0;
+    Success = 1;
+  }
+  
+  message Connect {
+    enum ConnectFailReason {
+      IncorrectVersion = 0;
+    }
+
+    models.State state = 1;
+    int32 server_version = 2;
+    string message = 3;
+    ConnectFailReason reason = 4;
+  }
+  
+  message Join {
+    enum JoinFailReason {
+      IncorrectPassword = 0;
+    }
+
+    models.State state = 1;
+    string self_guid = 2;
+    string tournament_id = 3;
+    string message = 4;
+    JoinFailReason reason = 5;
+  }
+
+  message LeaderboardScore {
+    repeated models.LeaderboardScore scores = 1;
+  }
+
+  message LoadSong {
+    models.PreviewBeatmapLevel level = 1;
+  }
+
+  message PreloadImageForStreamSync {
+    string file_id = 1;
+  }
+
+  message ShowModal {
+      string modal_id = 1;
+      string value = 2;
+  }
+
+  //--- State Update Responses ---//
+   message UpdateUser {
+    string message = 1;
+  }
+
+  message CreateMatch {
+    string message = 1;
+  }
+
+  message UpdateMatch {
+    string message = 1;
+  }
+
+  message DeleteMatch {
+    string message = 1;
+  }
+
+  message CreateQualifierEvent {
+    string message = 1;
+  }
+
+  message UpdateQualifierEvent {
+    string message = 1;
+  }
+
+  message DeleteQualifierEvent {
+    string message = 1;
+  }
+
+  message CreateTournament {
+    string message = 1;
+  }
+
+  message UpdateTournament {
+    string message = 1;
+  }
+
+  message DeleteTournament {
+    string message = 1;
+  }
+
+  message AddServer {
+    string message = 1;
+  }
+
+  ResponseType type = 1;
+  string responding_to_packet_id = 2;
+  oneof details {
+    Connect connect = 3;
+    Join join = 4;
+    LeaderboardScore leaderboard_score = 5;
+    LoadSong load_song = 6;
+    PreloadImageForStreamSync preload_image_for_stream_sync = 7;
+    ShowModal show_modal = 8;
+    UpdateUser update_user = 9;
+    CreateMatch create_match = 10;
+    UpdateMatch update_match = 11;
+    DeleteMatch delete_match = 12;
+    CreateQualifierEvent create_qualifier_event = 13;
+    UpdateQualifierEvent update_qualifier_event = 14;
+    DeleteQualifierEvent delete_qualifier_event = 15;
+    CreateTournament create_tournament = 16;
+    UpdateTournament update_tournament = 17;
+    DeleteTournament delete_tournament = 18;
+    AddServer add_server = 19;
+  }
+}
