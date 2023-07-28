@@ -206,6 +206,7 @@ message Tournament {
   repeated User users = 3;
   repeated Match matches = 4;
   repeated QualifierEvent qualifiers = 5;
+  CoreServer server = 6;
 }
 
 message State {
