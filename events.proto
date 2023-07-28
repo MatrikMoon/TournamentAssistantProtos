@@ -7,47 +7,47 @@ import "models.proto";
 
 message Event {
   message UserAdded {
-    string tournament_guid = 1;
+    string tournament_id = 1;
     models.User user = 2;
   }
 
   message UserUpdated {
-    string tournament_guid = 1;
+    string tournament_id = 1;
     models.User user = 2;
   }
 
   message UserLeft {
-    string tournament_guid = 1;
+    string tournament_id = 1;
     models.User user = 2;
   }
 
   message MatchCreated {
-    string tournament_guid = 1;
+    string tournament_id = 1;
     models.Match match = 2;
   }
 
   message MatchUpdated {
-    string tournament_guid = 1;
+    string tournament_id = 1;
     models.Match match = 2;
   }
 
   message MatchDeleted {
-    string tournament_guid = 1;
+    string tournament_id = 1;
     models.Match match = 2;
   }
 
   message QualifierCreated {
-    string tournament_guid = 1;
+    string tournament_id = 1;
     models.QualifierEvent event = 2;
   }
 
   message QualifierUpdated {
-    string tournament_guid = 1;
+    string tournament_id = 1;
     models.QualifierEvent event = 2;
   }
 
   message QualifierDeleted {
-    string tournament_guid = 1;
+    string tournament_id = 1;
     models.QualifierEvent event = 2;
   }
 
