@@ -11,46 +11,6 @@ message Response {
     Fail = 0;
     Success = 1;
   }
-  
-  message Connect {
-    enum ConnectFailReason {
-      IncorrectVersion = 0;
-    }
-
-    models.State state = 1;
-    int32 server_version = 2;
-    string message = 3;
-    ConnectFailReason reason = 4;
-  }
-  
-  message Join {
-    enum JoinFailReason {
-      IncorrectPassword = 0;
-    }
-
-    models.State state = 1;
-    string self_guid = 2;
-    string tournament_id = 3;
-    string message = 4;
-    JoinFailReason reason = 5;
-  }
-
-  message LeaderboardScore {
-    repeated models.LeaderboardScore scores = 1;
-  }
-
-  message LoadSong {
-    models.PreviewBeatmapLevel level = 1;
-  }
-
-  message PreloadImageForStreamSync {
-    string file_id = 1;
-  }
-
-  message ShowModal {
-      string modal_id = 1;
-      string value = 2;
-  }
 
   //--- State Update Responses ---//
    message UpdateUser {
@@ -97,25 +57,71 @@ message Response {
     string message = 1;
   }
 
+  // -- Other Responses --/
+  message Connect {
+    enum ConnectFailReason {
+      IncorrectVersion = 0;
+    }
+
+    models.State state = 1;
+    int32 server_version = 2;
+    string message = 3;
+    ConnectFailReason reason = 4;
+  }
+  
+  message Join {
+    enum JoinFailReason {
+      IncorrectPassword = 0;
+    }
+
+    models.State state = 1;
+    string self_guid = 2;
+    string tournament_id = 3;
+    string message = 4;
+    JoinFailReason reason = 5;
+  }
+
+  message LeaderboardScores {
+    repeated models.LeaderboardScore scores = 1;
+  }
+
+  message LoadSong {
+    models.PreviewBeatmapLevel level = 1;
+  }
+
+  message PreloadImageForStreamSync {
+    string file_id = 1;
+  }
+
+  message ShowModal {
+    string modal_id = 1;
+    string value = 2;
+  }
+
+  message RemainingAttempts {
+    int32 remaining_attempts = 1;
+  }
+
   ResponseType type = 1;
   string responding_to_packet_id = 2;
   oneof details {
-    Connect connect = 3;
-    Join join = 4;
-    LeaderboardScore leaderboard_score = 5;
-    LoadSong load_song = 6;
-    PreloadImageForStreamSync preload_image_for_stream_sync = 7;
-    ShowModal show_modal = 8;
-    UpdateUser update_user = 9;
-    CreateMatch create_match = 10;
-    UpdateMatch update_match = 11;
-    DeleteMatch delete_match = 12;
-    CreateQualifierEvent create_qualifier_event = 13;
-    UpdateQualifierEvent update_qualifier_event = 14;
-    DeleteQualifierEvent delete_qualifier_event = 15;
-    CreateTournament create_tournament = 16;
-    UpdateTournament update_tournament = 17;
-    DeleteTournament delete_tournament = 18;
-    AddServer add_server = 19;
+    UpdateUser update_user = 3;
+    CreateMatch create_match = 4;
+    UpdateMatch update_match = 5;
+    DeleteMatch delete_match = 6;
+    CreateQualifierEvent create_qualifier_event = 7;
+    UpdateQualifierEvent update_qualifier_event = 8;
+    DeleteQualifierEvent delete_qualifier_event = 9;
+    CreateTournament create_tournament = 10;
+    UpdateTournament update_tournament = 11;
+    DeleteTournament delete_tournament = 12;
+    AddServer add_server = 13;
+    Connect connect = 14;
+    Join join = 15;
+    LeaderboardScores leaderboard_scores = 16;
+    LoadSong load_song = 17;
+    PreloadImageForStreamSync preload_image_for_stream_sync = 18;
+    ShowModal show_modal = 19;
+    RemainingAttempts remaining_attempts = 20;
   }
 }

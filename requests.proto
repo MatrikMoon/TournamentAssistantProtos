@@ -7,40 +7,6 @@ import "models.proto";
 
 // ---- Requests (GET (or do?) something where you need a response!) ---- //
 message Request {
-  message Connect {
-    int32 client_version = 1;
-  }
-
-  message Join {
-    string tournament_id = 1;
-    string password = 2;
-  }
-
-  message LeaderboardScore {
-    string event_id = 1;
-    models.GameplayParameters parameters = 2;
-  }
-
-  message LoadSong {
-    string level_id = 1;
-    string custom_host_url = 2;
-  }
-
-  message PreloadImageForStreamSync {
-    string file_id = 1;
-    bool compressed = 2;
-    bytes data = 3;
-  }
-
-  message ShowModal {
-    string modal_id = 1;
-    string message_title = 2;
-    string message_text = 3;
-    bool can_close = 4;
-    models.ModalOption option_1 = 5;
-    models.ModalOption option_2 = 6;
-  }
-
   //--- State Update Requests ---//
   message UpdateUser {
     string tournamentId = 1;
@@ -100,23 +66,70 @@ message Request {
   //   string auth_token = 2;
   // }
 
+  // -- Other Requests -- //
+  message Connect {
+    int32 client_version = 1;
+  }
+
+  message Join {
+    string tournament_id = 1;
+    string password = 2;
+  }
+
+  message QualifierScores {
+    string event_id = 1;
+    string map_id = 2;
+  }
+
+  message SubmitQualifierScore {
+    models.LeaderboardScore qualifier_score = 1;
+    models.GameplayParameters map = 2;
+  }
+
+  message LoadSong {
+    string level_id = 1;
+    string custom_host_url = 2;
+  }
+
+  message PreloadImageForStreamSync {
+    string file_id = 1;
+    bool compressed = 2;
+    bytes data = 3;
+  }
+
+  message ShowModal {
+    string modal_id = 1;
+    string message_title = 2;
+    string message_text = 3;
+    bool can_close = 4;
+    models.ModalOption option_1 = 5;
+    models.ModalOption option_2 = 6;
+  }
+
+  message RemainingAttempts {
+    string event_id = 1;
+    string map_id = 2;
+  }
+
   oneof type {
-    Connect connect = 1;
-    Join join = 2;
-    LeaderboardScore leaderboard_score = 3;
-    LoadSong load_song = 4;
-    PreloadImageForStreamSync preload_image_for_stream_sync = 5;
-    ShowModal show_modal = 6;
-    UpdateUser update_user = 7;
-    CreateMatch create_match = 8;
-    UpdateMatch update_match = 9;
-    DeleteMatch delete_match = 10;
-    CreateQualifierEvent create_qualifier_event = 11;
-    UpdateQualifierEvent update_qualifier_event = 12;
-    DeleteQualifierEvent delete_qualifier_event = 13;
-    CreateTournament create_tournament = 14;
-    UpdateTournament update_tournament = 15;
-    DeleteTournament delete_tournament = 16;
-    AddServer add_server = 17;
+    UpdateUser update_user = 1;
+    CreateMatch create_match = 2;
+    UpdateMatch update_match = 3;
+    DeleteMatch delete_match = 4;
+    CreateQualifierEvent create_qualifier_event = 5;
+    UpdateQualifierEvent update_qualifier_event = 6;
+    DeleteQualifierEvent delete_qualifier_event = 7;
+    CreateTournament create_tournament = 8;
+    UpdateTournament update_tournament = 9;
+    DeleteTournament delete_tournament = 10;
+    AddServer add_server = 11;
+    Connect connect = 12;
+    Join join = 13;
+    QualifierScores qualifier_scores = 14;
+    SubmitQualifierScore submit_qualifier_score = 15;
+    LoadSong load_song = 16;
+    PreloadImageForStreamSync preload_image_for_stream_sync = 17;
+    ShowModal show_modal = 18;
+    RemainingAttempts remaining_attemtps = 19;
   }
 }

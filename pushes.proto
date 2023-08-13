@@ -26,9 +26,8 @@ message Push {
   }
 
   oneof data {
-    models.LeaderboardScore leaderboard_score = 1;
-    models.RealtimeScore realtime_score = 2;
-    SongFinished song_finished = 3;
-    DiscordAuthorized discord_authorized = 4;
+    models.RealtimeScore realtime_score = 1;
+    SongFinished song_finished = 2;
+    DiscordAuthorized discord_authorized = 3;
   }
 }
