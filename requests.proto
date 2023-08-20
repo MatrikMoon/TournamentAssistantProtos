@@ -130,6 +130,6 @@ message Request {
     LoadSong load_song = 16;
     PreloadImageForStreamSync preload_image_for_stream_sync = 17;
     ShowModal show_modal = 18;
-    RemainingAttempts remaining_attemtps = 19;
+    RemainingAttempts remaining_attempts = 19;
   }
 }
