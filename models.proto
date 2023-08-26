@@ -188,7 +188,8 @@ message QualifierEvent {
   discord.Channel info_channel = 4;
   repeated QualifierMap qualifier_maps = 5;
   bool send_scores_to_info_channel = 6;
-  int32 flags = 7;
+  EventSettings flags = 7;
+  bytes image = 8;
 }
 
 message CoreServer {
