@@ -4,16 +4,16 @@ package proto.discord;
 option csharp_namespace = "TournamentAssistantShared.Models.Discord";
 
 message Channel {
-  uint64 id = 1;
+  string id = 1;
   string name = 2;
 }
 
 message DiscordUser {
-  uint64 id = 1;
+  string id = 1;
   string name = 2;
 }
 
 message Guild {
-  uint64 id = 1;
+  string id = 1;
   string name = 2;
 }

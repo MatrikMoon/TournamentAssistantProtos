@@ -172,7 +172,8 @@ message QualifierEvent {
     None = 0;
     HideScoresFromPlayers = 1;
     DisableScoresaberSubmission = 2;
-    EnableLeaderboardMessage = 4;
+    EnableDiscordScoreFeed = 4;
+    EnableDiscordLeaderboard = 8;
   }
 
   message QualifierMap {
@@ -187,9 +188,8 @@ message QualifierEvent {
   discord.Guild guild = 3;
   discord.Channel info_channel = 4;
   repeated QualifierMap qualifier_maps = 5;
-  bool send_scores_to_info_channel = 6;
-  EventSettings flags = 7;
-  bytes image = 8;
+  EventSettings flags = 6;
+  bytes image = 7;
 }
 
 message CoreServer {
