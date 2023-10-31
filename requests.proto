@@ -82,7 +82,7 @@ message Request {
   }
 
   message SubmitQualifierScore {
-    models.LeaderboardScore qualifier_score = 1;
+    models.LeaderboardEntry qualifier_score = 1;
     models.GameplayParameters map = 2;
   }
 

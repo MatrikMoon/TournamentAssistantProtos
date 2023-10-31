@@ -81,8 +81,8 @@ message Response {
     JoinFailReason reason = 5;
   }
 
-  message LeaderboardScores {
-    repeated models.LeaderboardScore scores = 1;
+  message LeaderboardEntries {
+    repeated models.LeaderboardEntry scores = 1;
   }
 
   message LoadSong {
@@ -118,7 +118,7 @@ message Response {
     AddServer add_server = 13;
     Connect connect = 14;
     Join join = 15;
-    LeaderboardScores leaderboard_scores = 16;
+    LeaderboardEntries leaderboard_entries = 16;
     LoadSong load_song = 17;
     PreloadImageForStreamSync preload_image_for_stream_sync = 18;
     ShowModal show_modal = 19;
