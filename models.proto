@@ -185,6 +185,8 @@ message QualifierEvent {
     BadCutsAscending = 5;
     MaxCombo = 6;
     MaxComboAscending = 7;
+    GoodCuts = 8;
+    GoodCutsAscending = 9;
   }
 
   message QualifierMap {
@@ -250,10 +252,11 @@ message LeaderboardEntry {
   float accuracy = 8;
   int32 notes_missed = 9;
   int32 bad_cuts = 10;
-  int32 max_combo = 11;
-  bool full_combo = 12;
-  bool is_placeholder = 13;
-  string color = 14;
+  int32 good_cuts = 11;
+  int32 max_combo = 12;
+  bool full_combo = 13;
+  bool is_placeholder = 14;
+  string color = 15;
 }
 
 message RealtimeScore {
