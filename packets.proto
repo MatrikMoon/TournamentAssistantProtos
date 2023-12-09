@@ -63,6 +63,8 @@ message Push {
     models.Beatmap beatmap = 2;
     CompletionType type = 3;
     int32 score = 4;
+    int32 misses = 5;
+    float end_time = 6;
   }
 
   oneof data {
