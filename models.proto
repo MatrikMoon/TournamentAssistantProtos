@@ -17,13 +17,6 @@ message Beatmap {
   int32 difficulty = 4;
 }
 
-message PreviewBeatmapLevel {
-  string level_id = 1;
-  string name = 2;
-  repeated Characteristic characteristics = 3;
-  bool loaded = 4;
-}
-
 message GameplayModifiers {
   enum GameOptions {
     None = 0;
@@ -100,6 +93,17 @@ message GameplayParameters {
   Beatmap beatmap = 1;
   PlayerSpecificSettings player_settings = 2;
   GameplayModifiers gameplay_modifiers = 3;
+  int32 attempts = 4; // Qualifiers only
+  bool show_scoreboard = 5;
+  bool disable_pause = 6;
+  bool disable_fail = 7;
+  bool disable_scoresaber_submission = 8;
+  bool disable_custom_notes_on_stream = 9;
+}
+
+message Map {
+  string guid = 1;
+  GameplayParameters gameplay_parameters = 2;
 }
 
 message Team {
@@ -108,7 +112,7 @@ message Team {
 }
 
 message SongList {
-  repeated PreviewBeatmapLevel levels = 1;
+  repeated Beatmap levels = 1;
 }
 
 message User {
@@ -161,7 +165,7 @@ message Match {
   string guid = 1;
   repeated string associated_users = 2;
   string leader = 3;
-  PreviewBeatmapLevel selected_level = 5;
+  Beatmap selected_level = 5;
   Characteristic selected_characteristic = 6;
   int32 selected_difficulty = 7;
   string start_time = 8;
@@ -189,18 +193,11 @@ message QualifierEvent {
     GoodCutsAscending = 9;
   }
 
-  message QualifierMap {
-    string guid = 1;
-    GameplayParameters gameplay_parameters = 2;
-    bool disable_pause = 3;
-    int32 attempts = 4;
-  }
-
   string guid = 1;
   string name = 2;
   discord.Guild guild = 3;
   discord.Channel info_channel = 4;
-  repeated QualifierMap qualifier_maps = 5;
+  repeated Map qualifier_maps = 5;
   EventSettings flags = 6;
   LeaderboardSort sort = 7;
   bytes image = 8;
@@ -215,12 +212,19 @@ message CoreServer {
 
 message Tournament {
   message TournamentSettings {
+    message Pool {
+      string guid = 1;
+      string name = 2;
+      repeated Map maps = 3;
+    }
+
     string tournament_name = 1;
     bytes tournament_image = 2;
     bool enable_teams = 3;
     repeated Team teams = 4;
     int32 score_update_frequency = 5;
     repeated string banned_mods = 6;
+    repeated Pool pools = 7;
   }
 
   string guid = 1;

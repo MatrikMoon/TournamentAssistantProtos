@@ -13,7 +13,7 @@ message Response {
   }
 
   //--- State Update Responses ---//
-   message UpdateUser {
+  message UpdateUser {
     string message = 1;
   }
 
@@ -43,6 +43,7 @@ message Response {
 
   message CreateTournament {
     string message = 1;
+    models.Tournament tournament = 2;
   }
 
   message UpdateTournament {
@@ -86,7 +87,7 @@ message Response {
   }
 
   message LoadSong {
-    models.PreviewBeatmapLevel level = 1;
+    string level_id = 1;
   }
 
   message PreloadImageForStreamSync {
