@@ -106,11 +106,6 @@ message Map {
   GameplayParameters gameplay_parameters = 2;
 }
 
-message Team {
-  string guid = 1;
-  string name = 2;
-}
-
 message SongList {
   repeated Beatmap levels = 1;
 }
@@ -150,7 +145,7 @@ message User {
   string name = 2;
   string platform_id = 3;
   ClientTypes client_type = 4;
-  Team team = 5;
+  string team_id = 5;
   PlayStates play_state = 6;
   DownloadStates download_state = 7;
   repeated string mod_list = 8;
@@ -216,6 +211,12 @@ message Tournament {
       string guid = 1;
       string name = 2;
       repeated Map maps = 3;
+    }
+
+    message Team {
+      string guid = 1;
+      string name = 2;
+      bytes image = 3;
     }
 
     string tournament_name = 1;
