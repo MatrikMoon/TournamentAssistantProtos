@@ -10,12 +10,6 @@ import "models.proto";
 message Command {
   message PlaySong {
     models.GameplayParameters gameplay_parameters = 1;
-    bool floating_scoreboard = 3;
-    bool stream_sync = 4;
-    bool disable_fail = 5;
-    bool disable_pause = 6;
-    bool disable_scoresaber_submission = 7;
-    bool show_normal_notes_on_stream = 8;
   }
 
   message SendBotMessage {

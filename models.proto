@@ -99,6 +99,7 @@ message GameplayParameters {
   bool disable_fail = 7;
   bool disable_scoresaber_submission = 8;
   bool disable_custom_notes_on_stream = 9;
+  bool use_sync = 10;
 }
 
 message Map {
