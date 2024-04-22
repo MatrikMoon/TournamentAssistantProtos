@@ -246,7 +246,7 @@ message LeaderboardEntry {
   int32 multiplied_score = 5;
   int32 modified_score = 6;
   int32 max_possible_score = 7;
-  float accuracy = 8;
+  double accuracy = 8;
   int32 notes_missed = 9;
   int32 bad_cuts = 10;
   int32 good_cuts = 11;
