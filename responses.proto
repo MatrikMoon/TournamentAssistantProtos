@@ -15,30 +15,37 @@ message Response {
   //--- State Update Responses ---//
   message UpdateUser {
     string message = 1;
+    models.User user = 2;
   }
 
   message CreateMatch {
     string message = 1;
+    models.Match match = 2;
   }
 
   message UpdateMatch {
     string message = 1;
+    models.Match match = 2;
   }
 
   message DeleteMatch {
     string message = 1;
+    models.Match match = 2;
   }
 
   message CreateQualifierEvent {
     string message = 1;
+    models.QualifierEvent qualifier = 2;
   }
 
   message UpdateQualifierEvent {
     string message = 1;
+    models.QualifierEvent qualifier = 2;
   }
 
   message DeleteQualifierEvent {
     string message = 1;
+    models.QualifierEvent qualifier = 2;
   }
 
   message CreateTournament {
@@ -48,14 +55,17 @@ message Response {
 
   message UpdateTournament {
     string message = 1;
+    models.Tournament tournament = 2;
   }
 
   message DeleteTournament {
     string message = 1;
+    models.Tournament tournament = 2;
   }
 
   message AddServer {
     string message = 1;
+    models.CoreServer server = 2;
   }
 
   // -- Other Responses --/

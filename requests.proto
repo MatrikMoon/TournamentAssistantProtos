@@ -4,57 +4,201 @@ package proto.packets;
 option csharp_namespace = "TournamentAssistantShared.Models.Packets";
 
 import "models.proto";
+import "discord.proto";
 
 // ---- Requests (GET (or do?) something where you need a response!) ---- //
 message Request {
   //--- State Update Requests ---//
   message UpdateUser {
-    string tournamentId = 1;
+    string tournament_id = 1;
     models.User user = 2;
   }
 
+  // -- Match -- //
   message CreateMatch {
-    string tournamentId = 1;
+    string tournament_id = 1;
     models.Match match = 2;
   }
 
-  message UpdateMatch {
-    string tournamentId = 1;
-    models.Match match = 2;
+  message AddUserToMatch {
+    string tournament_id = 1;
+    string match_id = 2;
+    string user_id = 3;
+  }
+
+  message RemoveUserFromMatch {
+    string tournament_id = 1;
+    string match_id = 2;
+    string user_id = 3;
+  }
+
+  message SetMatchLeader {
+    string tournament_id = 1;
+    string match_id = 2;
+    string user_id = 3;
+  }
+
+  message SetMatchMap {
+    string tournament_id = 1;
+    string match_id = 2;
+    models.Map map = 3;
   }
 
   message DeleteMatch {
-    string tournamentId = 1;
-    models.Match match = 2;
+    string tournament_id = 1;
+    string match_id = 2;
   }
 
+  // -- Qualifiers -- //
   message CreateQualifierEvent {
-    string tournamentId = 1;
+    string tournament_id = 1;
     models.QualifierEvent event = 2;
   }
 
-  message UpdateQualifierEvent {
-    string tournamentId = 1;
-    models.QualifierEvent event = 2;
+  message SetQualifierName {
+    string tournament_id = 1;
+    string qualifier_id = 2;
+    string qualifier_name = 3;
+  }
+
+  message SetQualifierImage {
+    string tournament_id = 1;
+    string qualifier_id = 2;
+    bytes qualifier_image = 3;
+  }
+
+  message SetQualifierInfoChannel {
+    string tournament_id = 1;
+    string qualifier_id = 2;
+    discord.Channel info_channel = 3;
+  }
+
+  message SetQualifierFlags {
+    string tournament_id = 1;
+    string qualifier_id = 2;
+    models.QualifierEvent.EventSettings qualifier_flags = 3;
+  }
+
+  message SetQualifierLeaderboardSort {
+    string tournament_id = 1;
+    string qualifier_id = 2;
+    models.QualifierEvent.LeaderboardSort qualifier_leaderboard_sort = 3;
+  }
+
+  message AddQualifierMap {
+    string tournament_id = 1;
+    string qualifier_id = 2;
+    models.Map map = 3;
+  }
+
+  message UpdateQualifierMap {
+    string tournament_id = 1;
+    string qualifier_id = 2;
+    models.Map map = 3;
+  }
+
+  message RemoveQualifierMap {
+    string tournament_id = 1;
+    string qualifier_id = 2;
+    string map_id = 3;
   }
 
   message DeleteQualifierEvent {
-    string tournamentId = 1;
-    models.QualifierEvent event = 2;
+    string tournament_id = 1;
+    string qualifier_id = 2;
   }
 
+  // -- Tournament -- //
   message CreateTournament {
     models.Tournament tournament = 1;
   }
 
-  message UpdateTournament {
-    models.Tournament tournament = 1;
+  message SetTournamentName {
+    string tournament_id = 1;
+    string tournament_name = 2;
+  }
+
+  message SetTournamentImage {
+    string tournament_id = 1;
+    bytes tournament_image = 2;
+  }
+
+  message SetTournamentEnableTeams {
+    string tournament_id = 1;
+    bool enable_teams = 2;
+  }
+
+  message SetTournamentScoreUpdateFrequency {
+    string tournament_id = 1;
+    int32 score_update_frequency = 2;
+  }
+
+  message SetTournamentBannedMods {
+    string tournament_id = 1;
+    repeated string banned_mods = 2;
+  }
+
+  message AddTournamentTeam {
+    string tournament_id = 1;
+    models.Tournament.TournamentSettings.Team team = 2;
+  }
+
+  message SetTournamentTeamName {
+    string tournament_id = 1;
+    string team_id = 2;
+    string team_name = 3;
+  }
+
+  message SetTournamentTeamImage {
+    string tournament_id = 1;
+    string team_id = 2;
+    bytes team_image = 3;
+  }
+
+  message RemoveTournamentTeam {
+    string tournament_id = 1;
+    string team_id = 2;
+  }
+
+  message AddTournamentPool {
+    string tournament_id = 1;
+    models.Tournament.TournamentSettings.Pool pool = 2;
+  }
+
+  message SetTournamentPoolName {
+    string tournament_id = 1;
+    string pool_id = 2;
+    string pool_name = 3;
+  }
+
+  message AddTournamentPoolMap {
+    string tournament_id = 1;
+    string pool_id = 2;
+    models.Map map = 3;
+  }
+
+  message UpdateTournamentPoolMap {
+    string tournament_id = 1;
+    string pool_id = 2;
+    models.Map map = 3;
+  }
+
+  message RemoveTournamentPoolMap {
+    string tournament_id = 1;
+    string pool_id = 2;
+    string map_id = 3;
+  }
+
+  message RemoveTournamentPool {
+    string tournament_id = 1;
+    string pool_id = 2;
   }
 
   message DeleteTournament {
-    models.Tournament tournament = 1;
+    string tournament_id = 1;
   }
 
+  // -- Server -- //
   message AddServer {
     models.CoreServer server = 1;
     string auth_token = 2;
@@ -114,22 +258,46 @@ message Request {
   oneof type {
     UpdateUser update_user = 1;
     CreateMatch create_match = 2;
-    UpdateMatch update_match = 3;
-    DeleteMatch delete_match = 4;
-    CreateQualifierEvent create_qualifier_event = 5;
-    UpdateQualifierEvent update_qualifier_event = 6;
-    DeleteQualifierEvent delete_qualifier_event = 7;
-    CreateTournament create_tournament = 8;
-    UpdateTournament update_tournament = 9;
-    DeleteTournament delete_tournament = 10;
-    AddServer add_server = 11;
-    Connect connect = 12;
-    Join join = 13;
-    QualifierScores qualifier_scores = 14;
-    SubmitQualifierScore submit_qualifier_score = 15;
-    LoadSong load_song = 16;
-    PreloadImageForStreamSync preload_image_for_stream_sync = 17;
-    ShowModal show_modal = 18;
-    RemainingAttempts remaining_attempts = 19;
+    AddUserToMatch add_user_to_match = 3;
+    RemoveUserFromMatch remove_user_from_match = 4;
+    SetMatchLeader set_match_leader = 5;
+    SetMatchMap set_match_map = 6;
+    DeleteMatch delete_match = 7;
+    CreateQualifierEvent create_qualifier_event = 8;
+    SetQualifierName set_qualifier_name = 9;
+    SetQualifierInfoChannel set_qualifier_info_channel = 10;
+    SetQualifierImage set_qualifier_image = 11;
+    SetQualifierFlags set_qualifier_flags = 12;
+    SetQualifierLeaderboardSort set_qualifier_leaderboard_sort = 13;
+    AddQualifierMap add_qualifier_map = 14;
+    UpdateQualifierMap update_qualifier_map = 15;
+    RemoveQualifierMap remove_qualifier_map = 16;
+    DeleteQualifierEvent delete_qualifier_event = 17;
+    CreateTournament create_tournament = 18; 
+    SetTournamentName set_tournament_name = 19;
+    SetTournamentImage set_tournament_image = 20;
+    SetTournamentEnableTeams set_tournament_enable_teams = 21;
+    SetTournamentScoreUpdateFrequency set_tournament_score_update_frequency = 22;
+    SetTournamentBannedMods set_tournament_banned_mods = 23;
+    AddTournamentTeam add_tournament_team = 24;
+    SetTournamentTeamName set_tournament_team_name = 25;
+    SetTournamentTeamImage set_tournament_team_image = 26;
+    RemoveTournamentTeam remove_tournament_team = 27;
+    AddTournamentPool add_tournament_pool = 28;
+    SetTournamentPoolName set_tournament_pool_name = 29;
+    AddTournamentPoolMap add_tournament_pool_map = 30;
+    UpdateTournamentPoolMap update_tournament_pool_map = 31;
+    RemoveTournamentPoolMap remove_tournament_pool_map = 32;
+    RemoveTournamentPool remove_tournament_pool = 33;
+    DeleteTournament delete_tournament = 34;
+    AddServer add_server = 35;
+    Connect connect = 36;
+    Join join = 37;
+    QualifierScores qualifier_scores = 38;
+    SubmitQualifierScore submit_qualifier_score = 39;
+    LoadSong load_song = 40;
+    PreloadImageForStreamSync preload_image_for_stream_sync = 41;
+    ShowModal show_modal = 42;
+    RemainingAttempts remaining_attempts = 43;
   }
 }

@@ -156,8 +156,7 @@ message Match {
   string guid = 1;
   repeated string associated_users = 2;
   string leader = 3;
-  Map selected_map = 5;
-  string start_time = 8;
+  Map selected_map = 4;
 }
 
 message QualifierEvent {
@@ -184,12 +183,11 @@ message QualifierEvent {
 
   string guid = 1;
   string name = 2;
-  discord.Guild guild = 3;
+  bytes image = 3;
   discord.Channel info_channel = 4;
   repeated Map qualifier_maps = 5;
   EventSettings flags = 6;
   LeaderboardSort sort = 7;
-  bytes image = 8;
 }
 
 message CoreServer {
