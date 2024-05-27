@@ -202,7 +202,8 @@ message Tournament {
     message Pool {
       string guid = 1;
       string name = 2;
-      repeated Map maps = 3;
+      bytes image = 3;
+      repeated Map maps = 4;
     }
 
     message Team {
@@ -214,10 +215,13 @@ message Tournament {
     string tournament_name = 1;
     bytes tournament_image = 2;
     bool enable_teams = 3;
-    repeated Team teams = 4;
-    int32 score_update_frequency = 5;
-    repeated string banned_mods = 6;
-    repeated Pool pools = 7;
+    bool enable_pools = 4;
+    repeated Team teams = 5;
+    int32 score_update_frequency = 6;
+    repeated string banned_mods = 7;
+    repeated Pool pools = 8;
+    bool show_tournament_button = 9;
+    bool show_qualifier_button = 10;
   }
 
   string guid = 1;

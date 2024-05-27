@@ -128,6 +128,21 @@ message Request {
     bool enable_teams = 2;
   }
 
+  message SetTournamentEnablePools {
+    string tournament_id = 1;
+    bool enable_pools = 2;
+  }
+  
+  message SetTournamentShowTournamentButton {
+    string tournament_id = 1;
+    bool show_tournament_button = 2;
+  }
+
+  message SetTournamentShowQualifierButton {
+    string tournament_id = 1;
+    bool show_qualifier_button = 2;
+  }
+
   message SetTournamentScoreUpdateFrequency {
     string tournament_id = 1;
     int32 score_update_frequency = 2;
@@ -277,7 +292,10 @@ message Request {
     SetTournamentName set_tournament_name = 19;
     SetTournamentImage set_tournament_image = 20;
     SetTournamentEnableTeams set_tournament_enable_teams = 21;
-    SetTournamentScoreUpdateFrequency set_tournament_score_update_frequency = 22;
+    SetTournamentEnablePools set_tournament_enable_pools = 44;
+    SetTournamentShowTournamentButton set_tournament_show_tournament_button = 45;
+    SetTournamentShowQualifierButton set_tournament_show_qualifier_button = 46;
+    SetTournamentScoreUpdateFrequency set_tournament_score_update_frequency = 47;
     SetTournamentBannedMods set_tournament_banned_mods = 23;
     AddTournamentTeam add_tournament_team = 24;
     SetTournamentTeamName set_tournament_team_name = 25;
