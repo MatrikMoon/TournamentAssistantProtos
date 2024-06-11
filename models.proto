@@ -107,6 +107,12 @@ message Map {
   GameplayParameters gameplay_parameters = 2;
 }
 
+enum Permissions {
+  None = 0;
+  View = 1;
+  Admin = 2;
+}
+
 message User {
   enum PlayStates {
     InMenu = 0;
