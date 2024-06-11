@@ -113,6 +113,18 @@ message Request {
     models.Tournament tournament = 1;
   }
 
+  message AddAuthorizedUser {
+    enum Permissions {
+      None = 0;
+      View = 1;
+      Admin = 2;
+    }
+
+    string tournament_id = 1;
+    models.User user = 2;
+    Permissions permission_flags = 3;
+  }
+
   message SetTournamentName {
     string tournament_id = 1;
     string tournament_name = 2;
