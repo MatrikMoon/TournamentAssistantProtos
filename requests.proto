@@ -111,29 +111,34 @@ message Request {
   // -- Tournament -- //
   message AddAuthorizedUser {
     string tournament_id = 1;
-    models.User user = 2;
+    string discord_id = 2;
     models.Permissions permission_flags = 3;
   }
   
   message AddAuthorizedUserPermission {
     string tournament_id = 1;
-    models.User user = 2;
+    string discord_id = 2;
     models.Permissions permission = 3;
   }
 
   message RemoveAuthorizedUserPermission {
     string tournament_id = 1;
-    models.User user = 2;
+    string discord_id = 2;
     models.Permissions permission = 3;
   }
 
   message RemoveAuthorizedUser {
     string tournament_id = 1;
-    models.User user = 2;
+    string discord_id = 2;
   }
 
   message GetAuthorizedUsers {
     string tournament_id = 1;
+  }
+
+  message GetDiscordInfo {
+    string tournament_id = 1; // Included so this request can be gated behind admin permission. TODO: Should this really be done on the backend? If we cached the user's token we could do it on the frontend... Maybe
+    string discord_id = 2;
   }
 
   message CreateTournament {
@@ -320,6 +325,7 @@ message Request {
     RemoveAuthorizedUserPermission remove_authorized_user_permission = 50;
     RemoveAuthorizedUser remove_authorized_user = 51;
     GetAuthorizedUsers get_authorized_users = 52;
+    GetDiscordInfo get_discord_info = 53;
     CreateTournament create_tournament = 18;
     SetTournamentName set_tournament_name = 19;
     SetTournamentImage set_tournament_image = 20;

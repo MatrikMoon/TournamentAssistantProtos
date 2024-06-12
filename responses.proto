@@ -50,19 +50,19 @@ message Response {
 
   message AddAuthorizedUser {
     string tournament_id = 1;
-    models.User user = 2;
+    string discord_id = 2;
     models.Permissions permission_flags = 3;
   }
   
   message UpdateAuthorizedUser {
     string tournament_id = 1;
-    models.User user = 2;
+    string discord_id = 2;
     models.Permissions permission_flags = 3;
   }
   
   message RemoveAuthorizedUser {
     string tournament_id = 1;
-    models.User user = 2;
+    string discord_id = 2;
     models.Permissions permission_flags = 3;
   }
 
@@ -76,6 +76,12 @@ message Response {
 
     string tournament_id = 1;
     repeated AuthroizedUser authorized_users = 2;
+  }
+
+  message GetDiscordInfo {
+    string discord_id = 1;
+    string discord_username = 2;
+    string discord_avatar_url = 3;
   }
 
   message CreateTournament {
@@ -157,6 +163,7 @@ message Response {
     UpdateAuthorizedUser update_authorized_user = 22;
     RemoveAuthorizedUser remove_authorized_user = 23;
     GetAuthorizedUsers get_authorized_users = 24;
+    GetDiscordInfo get_discord_info = 25;
     CreateTournament create_tournament = 10;
     UpdateTournament update_tournament = 11;
     DeleteTournament delete_tournament = 12;
