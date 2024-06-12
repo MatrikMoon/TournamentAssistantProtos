@@ -109,14 +109,35 @@ message Request {
   }
 
   // -- Tournament -- //
-  message CreateTournament {
-    models.Tournament tournament = 1;
-  }
-
   message AddAuthorizedUser {
     string tournament_id = 1;
     models.User user = 2;
     models.Permissions permission_flags = 3;
+  }
+  
+  message AddAuthorizedUserPermission {
+    string tournament_id = 1;
+    models.User user = 2;
+    models.Permissions permission = 3;
+  }
+
+  message RemoveAuthorizedUserPermission {
+    string tournament_id = 1;
+    models.User user = 2;
+    models.Permissions permission = 3;
+  }
+
+  message RemoveAuthorizedUser {
+    string tournament_id = 1;
+    models.User user = 2;
+  }
+
+  message GetAuthorizedUsers {
+    string tournament_id = 1;
+  }
+
+  message CreateTournament {
+    models.Tournament tournament = 1;
   }
 
   message SetTournamentName {
@@ -294,7 +315,12 @@ message Request {
     UpdateQualifierMap update_qualifier_map = 15;
     RemoveQualifierMap remove_qualifier_map = 16;
     DeleteQualifierEvent delete_qualifier_event = 17;
-    CreateTournament create_tournament = 18; 
+    AddAuthorizedUser add_authorized_user = 48;
+    AddAuthorizedUserPermission add_authorized_user_permission = 49;
+    RemoveAuthorizedUserPermission remove_authorized_user_permission = 50;
+    RemoveAuthorizedUser remove_authorized_user = 51;
+    GetAuthorizedUsers get_authorized_users = 52;
+    CreateTournament create_tournament = 18;
     SetTournamentName set_tournament_name = 19;
     SetTournamentImage set_tournament_image = 20;
     SetTournamentEnableTeams set_tournament_enable_teams = 21;
