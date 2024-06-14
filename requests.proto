@@ -137,7 +137,7 @@ message Request {
   }
 
   message GetDiscordInfo {
-    string tournament_id = 1; // Included so this request can be gated behind admin permission. TODO: Should this really be done on the backend? If we cached the user's token we could do it on the frontend... Maybe
+    string tournament_id = 1; // Included so this request can be permission gated to a tourney
     string discord_id = 2;
   }
 
@@ -268,13 +268,15 @@ message Request {
   }
 
   message QualifierScores {
-    string event_id = 1;
-    string map_id = 2;
+    string tournament_id = 1; // Included so this request can be permission gated to a tourney
+    string event_id = 2;
+    string map_id = 3;
   }
 
   message SubmitQualifierScore {
-    models.LeaderboardEntry qualifier_score = 1;
-    models.GameplayParameters map = 2;
+    string tournament_id = 1; // Included so this request can be permission gated to a tourney
+    models.LeaderboardEntry qualifier_score = 2;
+    models.GameplayParameters map = 3;
   }
 
   message LoadSong {
@@ -298,8 +300,9 @@ message Request {
   }
 
   message RemainingAttempts {
-    string event_id = 1;
-    string map_id = 2;
+    string tournament_id = 1; // Included so this request can be permission gated to a tourney
+    string event_id = 2;
+    string map_id = 3;
   }
 
   oneof type {
