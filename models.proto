@@ -229,6 +229,7 @@ message Tournament {
     repeated Pool pools = 8;
     bool show_tournament_button = 9;
     bool show_qualifier_button = 10;
+    bool allow_unauthorized_view = 11;
   }
 
   string guid = 1;
