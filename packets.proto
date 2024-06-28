@@ -64,7 +64,9 @@ message Push {
     CompletionType type = 3;
     int32 score = 4;
     int32 misses = 5;
-    float end_time = 6;
+    int32 bad_cuts = 6;
+    int32 good_cuts = 7;
+    float end_time = 8;
   }
 
   oneof data {
