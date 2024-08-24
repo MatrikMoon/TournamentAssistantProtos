@@ -1,6 +1,6 @@
 # Define source and destination directories
 $sourceDir = ".\TS"
-$destinationDir = "..\..\TournamentAssistantTypescriptClient\src\models"
+$destinationDir = "..\..\TournamentAssistantClient\src\models"
 
 # Ensure the destination directory exists, create if it does not
 if (-Not (Test-Path -Path $destinationDir)) {
