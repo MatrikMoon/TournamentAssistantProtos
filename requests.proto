@@ -85,10 +85,10 @@ message Request {
     models.QualifierEvent.LeaderboardSort qualifier_leaderboard_sort = 3;
   }
 
-  message AddQualifierMap {
+  message AddQualifierMaps {
     string tournament_id = 1;
     string qualifier_id = 2;
-    models.Map map = 3;
+    repeated models.Map maps = 3;
   }
 
   message UpdateQualifierMap {
@@ -324,7 +324,7 @@ message Request {
     SetQualifierImage set_qualifier_image = 11;
     SetQualifierFlags set_qualifier_flags = 12;
     SetQualifierLeaderboardSort set_qualifier_leaderboard_sort = 13;
-    AddQualifierMap add_qualifier_map = 14;
+    AddQualifierMaps add_qualifier_maps = 14;
     UpdateQualifierMap update_qualifier_map = 15;
     RemoveQualifierMap remove_qualifier_map = 16;
     DeleteQualifierEvent delete_qualifier_event = 17;
