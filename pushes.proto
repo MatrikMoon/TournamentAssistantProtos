@@ -22,6 +22,8 @@ message Push {
     int32 bad_cuts = 6;
     int32 good_cuts = 7;
     float end_time = 8;
+    string tournament_id = 9;
+    string match_id = 10;
   }
 
   message DiscordAuthorized {
