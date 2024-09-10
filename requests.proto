@@ -223,10 +223,10 @@ message Request {
     string pool_name = 3;
   }
 
-  message AddTournamentPoolMap {
+  message AddTournamentPoolMaps {
     string tournament_id = 1;
     string pool_id = 2;
-    models.Map map = 3;
+    repeated models.Map maps = 3;
   }
 
   message UpdateTournamentPoolMap {
@@ -350,7 +350,7 @@ message Request {
     RemoveTournamentTeam remove_tournament_team = 27;
     AddTournamentPool add_tournament_pool = 28;
     SetTournamentPoolName set_tournament_pool_name = 29;
-    AddTournamentPoolMap add_tournament_pool_map = 30;
+    AddTournamentPoolMaps add_tournament_pool_maps = 30;
     UpdateTournamentPoolMap update_tournament_pool_map = 31;
     RemoveTournamentPoolMap remove_tournament_pool_map = 32;
     RemoveTournamentPool remove_tournament_pool = 33;
