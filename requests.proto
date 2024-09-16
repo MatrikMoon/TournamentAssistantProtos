@@ -265,6 +265,7 @@ message Request {
   // -- Other Requests -- //
   message Connect {
     int32 client_version = 1;
+    int32 ui_version = 2; // TAUI uses the client, but also can be required to update when the client has not
   }
 
   message Join {
