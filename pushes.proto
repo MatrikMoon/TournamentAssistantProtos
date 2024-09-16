@@ -26,14 +26,8 @@ message Push {
     string match_id = 10;
   }
 
-  message DiscordAuthorized {
-    bool success = 1;
-    string token = 2;
-  }
-
   oneof data {
     models.RealtimeScore realtime_score = 1;
     SongFinished song_finished = 2;
-    DiscordAuthorized discord_authorized = 3;
   }
 }
