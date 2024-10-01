@@ -99,7 +99,8 @@ message GameplayParameters {
   bool disable_fail = 7;
   bool disable_scoresaber_submission = 8;
   bool disable_custom_notes_on_stream = 9;
-  bool use_sync = 10;
+  bool use_sync = 10; // Matches only
+  int32 target = 11; // Qualifiers only
 }
 
 message Map {
@@ -178,14 +179,19 @@ message QualifierEvent {
   enum LeaderboardSort {
     ModifiedScore = 0;
     ModifiedScoreAscending = 1;
-    NotesMissed = 2;
-    NotesMissedAscending = 3;
-    BadCuts = 4;
-    BadCutsAscending = 5;
-    MaxCombo = 6;
-    MaxComboAscending = 7;
-    GoodCuts = 8;
-    GoodCutsAscending = 9;
+    ModifiedScoreTarget = 2;
+    NotesMissed = 3;
+    NotesMissedAscending = 4;
+    NotesMissedTarget = 5;
+    BadCuts = 6;
+    BadCutsAscending = 7;
+    BadCutsTarget = 8;
+    MaxCombo = 9;
+    MaxComboAscending = 10;
+    MaxComboTarget = 11;
+    GoodCuts = 12;
+    GoodCutsAscending = 13;
+    GoodCutsTarget = 14;
   }
 
   string guid = 1;
