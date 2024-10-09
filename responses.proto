@@ -140,9 +140,8 @@ message Response {
     string file_id = 1;
   }
 
-  message ShowModal {
-    string modal_id = 1;
-    string value = 2;
+  message ShowPrompt {
+    string value = 1;
   }
 
   message RemainingAttempts {
@@ -173,7 +172,7 @@ message Response {
     LeaderboardEntries leaderboard_entries = 16;
     LoadSong load_song = 17;
     PreloadImageForStreamSync preload_image_for_stream_sync = 18;
-    ShowModal show_modal = 19;
+    ShowPrompt show_prompt = 19;
     RemainingAttempts remaining_attempts = 20;
   }
 }

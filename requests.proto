@@ -296,13 +296,19 @@ message Request {
     bytes data = 3;
   }
 
-  message ShowModal {
-    string modal_id = 1;
+  message ShowPrompt {
+    message PromptOption {
+      string label = 1;
+      string value = 2;
+    }
+
+    string prompt_id = 1;
     string message_title = 2;
     string message_text = 3;
-    bool can_close = 4;
-    models.ModalOption option_1 = 5;
-    models.ModalOption option_2 = 6;
+    int32 timeout = 4;
+    bool show_timer = 5;
+    bool can_close = 6;
+    repeated PromptOption options = 7; // for now we can show up to three options
   }
 
   message RemainingAttempts {
@@ -363,7 +369,7 @@ message Request {
     SubmitQualifierScore submit_qualifier_score = 39;
     LoadSong load_song = 40;
     PreloadImageForStreamSync preload_image_for_stream_sync = 41;
-    ShowModal show_modal = 42;
+    ShowPrompt show_prompt = 42;
     RemainingAttempts remaining_attempts = 43;
   }
 }

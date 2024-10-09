@@ -251,11 +251,6 @@ message State {
   repeated CoreServer known_servers = 2;
 }
 
-message ModalOption {
-  string label = 1;
-  string value = 2;
-}
-
 message LeaderboardEntry {
   string event_id = 1;
   string map_id = 2;
