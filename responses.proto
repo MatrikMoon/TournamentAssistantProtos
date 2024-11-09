@@ -148,6 +148,24 @@ message Response {
     int32 remaining_attempts = 1;
   }
 
+  message GetBotTokensForUser {
+    message BotUser {
+      string guid = 1;
+      string username = 2;
+      string owner_discord_id = 3;
+    }
+
+    repeated BotUser bot_users = 1;
+  }
+
+  message GenerateBotToken {
+    string bot_token = 1;
+  }
+
+  message RevokeBotToken {
+    string message = 1;
+  }
+
   ResponseType type = 1;
   string responding_to_packet_id = 2;
   oneof details {
@@ -174,5 +192,8 @@ message Response {
     PreloadImageForStreamSync preload_image_for_stream_sync = 18;
     ShowPrompt show_prompt = 19;
     RemainingAttempts remaining_attempts = 20;
+    GetBotTokensForUser get_bot_tokens_for_user = 26;
+    GenerateBotToken generate_bot_token = 27;
+    RevokeBotToken revoke_bot_token = 28;
   }
 }

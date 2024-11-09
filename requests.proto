@@ -317,6 +317,18 @@ message Request {
     string map_id = 3;
   }
 
+  message GetBotTokensForUser {
+    string owner_discord_id = 1;
+  }
+
+  message GenerateBotToken {
+    string username = 1;
+  }
+
+  message RevokeBotToken {
+    string bot_token_guid = 1;
+  }
+
   oneof type {
     UpdateUser update_user = 1;
     CreateMatch create_match = 2;
@@ -371,5 +383,8 @@ message Request {
     PreloadImageForStreamSync preload_image_for_stream_sync = 41;
     ShowPrompt show_prompt = 42;
     RemainingAttempts remaining_attempts = 43;
+    GetBotTokensForUser get_bot_tokens_for_user = 55;
+    GenerateBotToken generate_bot_token = 56;
+    RevokeBotToken revoke_bot_token = 57;
   }
 }
