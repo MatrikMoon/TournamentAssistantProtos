@@ -17,6 +17,15 @@ message Command {
     string message = 2;
   }
 
+  message ModifyGameplay {
+    enum Modifier {
+      InvertColors = 0;
+      InvertHandedness = 1;
+    }
+
+    Modifier modifier = 1;
+  }
+
   oneof type {
     bool heartbeat = 1; //Is this really a command?
     bool return_to_menu = 2;
@@ -25,5 +34,6 @@ message Command {
     PlaySong play_song = 6;
     SendBotMessage send_bot_message = 7;
     string discord_authorize = 9;
+    ModifyGameplay modify_gameplay = 10;
   }
 }
