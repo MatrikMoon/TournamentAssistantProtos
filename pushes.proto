@@ -26,8 +26,16 @@ message Push {
     string match_id = 10;
   }
 
+  message QualifierScoreSubmitted {
+    string tournament_id = 1;
+    models.QualifierEvent event = 2;
+    models.GameplayParameters map = 3;
+    models.LeaderboardEntry qualifier_score = 4;
+  }
+
   oneof data {
     models.RealtimeScore realtime_score = 1;
     SongFinished song_finished = 2;
+    QualifierScoreSubmitted qualifier_score_submtited = 3;
   }
 }
