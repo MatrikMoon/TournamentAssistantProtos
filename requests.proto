@@ -330,6 +330,14 @@ message Request {
     string bot_token_guid = 1;
   }
 
+  message RefundAttempts {
+    string tournament_id = 1; // Included so this request can be permission gated to a tourney
+    string event_id = 2;
+    string map_id = 3;
+    string platform_id = 4;
+    int32 count = 5;
+  }
+
   oneof type {
     UpdateUser update_user = 1;
     CreateMatch create_match = 2;
@@ -387,5 +395,6 @@ message Request {
     GetBotTokensForUser get_bot_tokens_for_user = 55;
     GenerateBotToken generate_bot_token = 56;
     RevokeBotToken revoke_bot_token = 57;
+    RefundAttempts refund_attempts = 58;
   }
 }
