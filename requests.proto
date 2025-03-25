@@ -271,6 +271,7 @@ message Request {
   message Join {
     string tournament_id = 1;
     string password = 2;
+    repeated string mod_list = 3;
   }
 
   message QualifierScores {
