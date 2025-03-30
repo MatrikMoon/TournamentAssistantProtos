@@ -170,6 +170,10 @@ message Response {
     string message = 1;
   }
 
+  message ShowColorForStreamSync {
+    string message = 1;
+  }
+
   ResponseType type = 1;
   string responding_to_packet_id = 2;
   oneof details {
@@ -200,5 +204,6 @@ message Response {
     GenerateBotToken generate_bot_token = 27;
     RevokeBotToken revoke_bot_token = 28;
     RefundAttempts refund_attempts = 29;
+    ShowColorForStreamSync show_color_for_stream_sync = 30;
   }
 }

@@ -338,6 +338,10 @@ message Request {
     int32 count = 5;
   }
 
+  message ShowColorForStreamSync {
+    string color = 1;
+  }
+
   oneof type {
     UpdateUser update_user = 1;
     CreateMatch create_match = 2;
@@ -396,5 +400,6 @@ message Request {
     GenerateBotToken generate_bot_token = 56;
     RevokeBotToken revoke_bot_token = 57;
     RefundAttempts refund_attempts = 58;
+    ShowColorForStreamSync show_color_for_stream_sync = 59;
   }
 }
