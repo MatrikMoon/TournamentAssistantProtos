@@ -131,6 +131,7 @@ message User {
   enum ClientTypes {
     Player = 0;
     WebsocketConnection = 1;
+    RESTConnection = 2;
   }
 
   message DiscordInfo {
