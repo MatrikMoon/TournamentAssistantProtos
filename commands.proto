@@ -3,18 +3,12 @@ package proto.packets;
 
 option csharp_namespace = "TournamentAssistantShared.Models.Packets";
 
-import "discord.proto";
 import "models.proto";
 
 // ---- Commands (DO something!) ---- //
 message Command {
   message PlaySong {
     models.GameplayParameters gameplay_parameters = 1;
-  }
-
-  message SendBotMessage {
-    discord.Channel channel = 1;
-    string message = 2;
   }
 
   message ModifyGameplay {
@@ -26,14 +20,20 @@ message Command {
     Modifier modifier = 1;
   }
 
+  message ShowColorForStreamSync {
+    string color = 1;
+  }
+
+  string tournament_id = 11;
+  repeated string forward_to = 12;
+
   oneof type {
-    bool heartbeat = 1; //Is this really a command?
     bool return_to_menu = 2;
     bool delay_test_finish = 3;
     bool stream_sync_show_image = 4;
     PlaySong play_song = 6;
-    SendBotMessage send_bot_message = 7;
     string discord_authorize = 9;
     ModifyGameplay modify_gameplay = 10;
+    ShowColorForStreamSync show_color_for_stream_sync = 13;
   }
 }

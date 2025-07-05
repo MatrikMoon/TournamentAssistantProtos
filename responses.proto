@@ -51,19 +51,19 @@ message Response {
   message AddAuthorizedUser {
     string tournament_id = 1;
     string discord_id = 2;
-    models.Permissions permission_flags = 3;
+    repeated string roles = 3;
   }
   
   message UpdateAuthorizedUser {
     string tournament_id = 1;
     string discord_id = 2;
-    models.Permissions permission_flags = 3;
+    repeated string roles = 3;
   }
   
   message RemoveAuthorizedUser {
     string tournament_id = 1;
     string discord_id = 2;
-    models.Permissions permission_flags = 3;
+    repeated string roles = 3;
   }
 
   message GetAuthorizedUsers {
@@ -71,7 +71,7 @@ message Response {
       string discord_id = 1;
       string discord_username = 2;
       string discord_avatar_url = 3;
-      models.Permissions permission = 4;
+      repeated string roles = 4;
     }
 
     string tournament_id = 1;
@@ -170,10 +170,6 @@ message Response {
     string message = 1;
   }
 
-  message ShowColorForStreamSync {
-    string message = 1;
-  }
-
   ResponseType type = 1;
   string responding_to_packet_id = 2;
   oneof details {
@@ -204,6 +200,5 @@ message Response {
     GenerateBotToken generate_bot_token = 27;
     RevokeBotToken revoke_bot_token = 28;
     RefundAttempts refund_attempts = 29;
-    ShowColorForStreamSync show_color_for_stream_sync = 30;
   }
 }

@@ -112,19 +112,13 @@ message Request {
   message AddAuthorizedUser {
     string tournament_id = 1;
     string discord_id = 2;
-    models.Permissions permission_flags = 3;
+    repeated string role_ids = 3;
   }
   
-  message AddAuthorizedUserPermission {
+  message UpdateAuthorizedUserRoles {
     string tournament_id = 1;
     string discord_id = 2;
-    models.Permissions permission = 3;
-  }
-
-  message RemoveAuthorizedUserPermission {
-    string tournament_id = 1;
-    string discord_id = 2;
-    models.Permissions permission = 3;
+    repeated string role_ids = 3;
   }
 
   message RemoveAuthorizedUser {
@@ -246,6 +240,28 @@ message Request {
     string pool_id = 2;
   }
 
+  message AddTournamentRole {
+    string tournament_id = 1;
+    models.Role role = 2;
+  }
+
+  message SetTournamentRoleName {
+    string tournament_id = 1;
+    string role_id = 2;
+    string role_name = 3;
+  }
+
+  message SetTournamentRolePermissions {
+    string tournament_id = 1;
+    string role_id = 2;
+    repeated string permissions = 3;
+  }
+
+  message RemoveTournamentRole {
+    string tournament_id = 1;
+    string role_id = 2;
+  }
+
   message DeleteTournament {
     string tournament_id = 1;
   }
@@ -289,12 +305,16 @@ message Request {
   message LoadSong {
     string level_id = 1;
     string custom_host_url = 2;
+    string tournament_id = 3;
+    repeated string forward_to = 4;
   }
 
   message PreloadImageForStreamSync {
     string file_id = 1;
     bool compressed = 2;
     bytes data = 3;
+    string tournament_id = 4;
+    repeated string forward_to = 5;
   }
 
   message ShowPrompt {
@@ -310,6 +330,8 @@ message Request {
     bool show_timer = 5;
     bool can_close = 6;
     repeated PromptOption options = 7; // for now we can show up to three options
+    string tournament_id = 8;
+    repeated string forward_to = 9;
   }
 
   message RemainingAttempts {
@@ -338,10 +360,6 @@ message Request {
     int32 count = 5;
   }
 
-  message ShowColorForStreamSync {
-    string color = 1;
-  }
-
   oneof type {
     UpdateUser update_user = 1;
     CreateMatch create_match = 2;
@@ -361,8 +379,7 @@ message Request {
     RemoveQualifierMap remove_qualifier_map = 16;
     DeleteQualifierEvent delete_qualifier_event = 17;
     AddAuthorizedUser add_authorized_user = 48;
-    AddAuthorizedUserPermission add_authorized_user_permission = 49;
-    RemoveAuthorizedUserPermission remove_authorized_user_permission = 50;
+    UpdateAuthorizedUserRoles update_authorized_user_roles = 49;
     RemoveAuthorizedUser remove_authorized_user = 51;
     GetAuthorizedUsers get_authorized_users = 52;
     GetDiscordInfo get_discord_info = 53;
@@ -400,6 +417,9 @@ message Request {
     GenerateBotToken generate_bot_token = 56;
     RevokeBotToken revoke_bot_token = 57;
     RefundAttempts refund_attempts = 58;
-    ShowColorForStreamSync show_color_for_stream_sync = 59;
+    AddTournamentRole add_tournament_role = 59;
+    SetTournamentRoleName set_tournament_role_name = 60;
+    SetTournamentRolePermissions set_tournament_role_permissions = 61;
+    RemoveTournamentRole remove_tournament_role = 62;
   }
 }

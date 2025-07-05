@@ -29,6 +29,7 @@ message Packet {
   string id = 2;
   string from = 3;
   oneof packet {
+    bool heartbeat = 11;
     Acknowledgement acknowledgement = 4;
     ForwardingPacket forwarding_packet = 5;
     Command command = 6;
