@@ -134,6 +134,7 @@ message Response {
 
   message LoadSong {
     string level_id = 1;
+    string message = 2;
   }
 
   message PreloadImageForStreamSync {
