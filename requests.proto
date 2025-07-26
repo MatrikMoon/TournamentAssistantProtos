@@ -217,6 +217,12 @@ message Request {
     string pool_name = 3;
   }
 
+  message SetTournamentPoolImage {
+    string tournament_id = 1;
+    string pool_id = 2;
+    string pool_image = 3;
+  }
+
   message AddTournamentPoolMaps {
     string tournament_id = 1;
     string pool_id = 2;
@@ -399,6 +405,7 @@ message Request {
     RemoveTournamentTeam remove_tournament_team = 27;
     AddTournamentPool add_tournament_pool = 28;
     SetTournamentPoolName set_tournament_pool_name = 29;
+    SetTournamentPoolImage set_tournament_pool_image = 63;
     AddTournamentPoolMaps add_tournament_pool_maps = 30;
     UpdateTournamentPoolMap update_tournament_pool_map = 31;
     RemoveTournamentPoolMap remove_tournament_pool_map = 32;
