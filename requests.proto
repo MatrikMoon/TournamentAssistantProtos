@@ -64,7 +64,7 @@ message Request {
   message SetQualifierImage {
     string tournament_id = 1;
     string qualifier_id = 2;
-    bytes qualifier_image = 3;
+    string qualifier_image = 3;
   }
 
   message SetQualifierInfoChannel {
@@ -146,7 +146,7 @@ message Request {
 
   message SetTournamentImage {
     string tournament_id = 1;
-    bytes tournament_image = 2;
+    string tournament_image = 2;
   }
 
   message SetTournamentEnableTeams {
@@ -198,7 +198,7 @@ message Request {
   message SetTournamentTeamImage {
     string tournament_id = 1;
     string team_id = 2;
-    bytes team_image = 3;
+    string team_image = 3;
   }
 
   message RemoveTournamentTeam {

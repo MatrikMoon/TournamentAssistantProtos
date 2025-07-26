@@ -159,7 +159,6 @@ message User {
   int64 stream_delay_ms = 10;
   int64 stream_sync_start_ms = 11;
   DiscordInfo discord_info = 12;
-  bytes user_image = 13;
 }
 
 message Match {
@@ -198,7 +197,7 @@ message QualifierEvent {
 
   string guid = 1;
   string name = 2;
-  bytes image = 3;
+  string image = 3;
   discord.Channel info_channel = 4;
   repeated Map qualifier_maps = 5;
   EventSettings flags = 6;
@@ -217,18 +216,18 @@ message Tournament {
     message Pool {
       string guid = 1;
       string name = 2;
-      bytes image = 3;
+      string image = 3;
       repeated Map maps = 4;
     }
 
     message Team {
       string guid = 1;
       string name = 2;
-      bytes image = 3;
+      string image = 3;
     }
 
     string tournament_name = 1;
-    bytes tournament_image = 2;
+    string tournament_image = 2;
     bool enable_teams = 3;
     bool enable_pools = 4;
     repeated Team teams = 5;
