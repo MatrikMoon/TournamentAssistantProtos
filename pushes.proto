@@ -24,6 +24,8 @@ message Push {
     float end_time = 8;
     string tournament_id = 9;
     string match_id = 10;
+    int32 max_score = 11;
+    double accuracy = 12;
   }
 
   message QualifierScoreSubmitted {
