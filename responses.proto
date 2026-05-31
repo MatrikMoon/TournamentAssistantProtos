@@ -115,7 +115,7 @@ message Response {
     string message = 3;
     ConnectFailReason reason = 4;
   }
-  
+
   message Join {
     enum JoinFailReason {
       IncorrectPassword = 0;
@@ -171,6 +171,12 @@ message Response {
     string message = 1;
   }
 
+  message PermissionError {
+    string required_permission = 1;
+    string current_roles = 2;
+    string current_permissions = 3;
+  }
+
   ResponseType type = 1;
   string responding_to_packet_id = 2;
   oneof details {
@@ -201,5 +207,6 @@ message Response {
     GenerateBotToken generate_bot_token = 27;
     RevokeBotToken revoke_bot_token = 28;
     RefundAttempts refund_attempts = 29;
+    PermissionError permission_error = 30;
   }
 }
