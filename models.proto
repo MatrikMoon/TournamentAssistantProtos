@@ -1,5 +1,6 @@
 syntax = "proto3";
 package proto.models;
+import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "TournamentAssistantShared.Models";
 
@@ -289,6 +290,8 @@ message RealtimeScore {
   int32 max_combo = 14;
   models.ScoreTrackerHand left_hand = 15;
   models.ScoreTrackerHand right_hand = 16;
+  google.protobuf.Timestamp timestamp = 17;
+  google.protobuf.Timestamp song_start_time = 18;
 }
 
 message ScoreTrackerHand {
