@@ -240,6 +240,7 @@ message Tournament {
     bool allow_unauthorized_view = 11;
     repeated Role roles = 12;
     repeated string my_permissions = 13;
+    bool enable_replay_streaming = 14;
   }
 
   string guid = 1;

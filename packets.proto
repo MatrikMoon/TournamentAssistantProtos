@@ -8,6 +8,7 @@ import "pushes.proto";
 import "requests.proto";
 import "responses.proto";
 import "events.proto";
+import "replay_stream.proto";
 
 // ---- Backbone ---- //
 message Acknowledgement {
@@ -37,5 +38,6 @@ message Packet {
     Request request = 8;
     Response response = 9;
     Event event = 10;
+    replay.ReplayStreamPacket replay_stream = 12;
   }
 }

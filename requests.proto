@@ -158,6 +158,11 @@ message Request {
     string tournament_id = 1;
     bool enable_pools = 2;
   }
+
+  message SetTournamentEnableReplayStreaming {
+    string tournament_id = 1;
+    bool enable_replay_streaming = 2;
+  }
   
   message SetTournamentShowTournamentButton {
     string tournament_id = 1;
@@ -428,5 +433,6 @@ message Request {
     SetTournamentRoleName set_tournament_role_name = 60;
     SetTournamentRolePermissions set_tournament_role_permissions = 61;
     RemoveTournamentRole remove_tournament_role = 62;
+    SetTournamentEnableReplayStreaming set_tournament_enable_replay_streaming = 64;
   }
 }
