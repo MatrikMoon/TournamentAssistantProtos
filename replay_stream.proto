@@ -94,8 +94,6 @@ message StreamReplayMetadata {
   float jump_distance = 17;
   ReplayColor left_saber_color = 18;
   ReplayColor right_saber_color = 19;
-  string environment_override = 20;
-  string color_scheme_id = 21;
 }
 
 message StreamReplayEventBatch {
