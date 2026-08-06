@@ -26,6 +26,15 @@ message ReplayStreamStart {
   int64 server_start_time_unix_ms = 10;
   string game_session_id = 11;
   StreamReplayMetadata replay_metadata = 13;
+  // Optional, bounded start-of-stream data. The wire shape intentionally
+  // matches ScoreSaber Ludus so viewers can reuse its extension decoders.
+  repeated ReplayExtension replay_extensions = 14;
+}
+
+message ReplayExtension {
+  string id = 1;
+  uint32 version = 2;
+  bytes payload = 3;
 }
 
 message PlayerIdentity {
@@ -85,8 +94,6 @@ message StreamReplayMetadata {
   float jump_distance = 17;
   ReplayColor left_saber_color = 18;
   ReplayColor right_saber_color = 19;
-  string environment_override = 20;
-  string color_scheme_id = 21;
 }
 
 message StreamReplayEventBatch {
