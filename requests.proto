@@ -176,6 +176,11 @@ message Request {
     string tournament_id = 1;
     bool enable_replay_streaming = 2;
   }
+
+  message SetTournamentAllowMockClients {
+    string tournament_id = 1;
+    bool allow_mock_clients = 2;
+  }
   
   message SetTournamentShowTournamentButton {
     string tournament_id = 1;
@@ -314,6 +319,10 @@ message Request {
     repeated string mod_list = 3;
   }
 
+  message LeaveTournament {
+    string tournament_id = 1;
+  }
+
   message QualifierScores {
     string tournament_id = 1; // Included so this request can be permission gated to a tourney
     string event_id = 2;
@@ -449,5 +458,7 @@ message Request {
     SetTournamentEnableReplayStreaming set_tournament_enable_replay_streaming = 64;
     SetQualifierStartTime set_qualifier_start_time = 65;
     SetQualifierEndTime set_qualifier_end_time = 66;
+    SetTournamentAllowMockClients set_tournament_allow_mock_clients = 67;
+    LeaveTournament leave_tournament = 68;
   }
 }

@@ -128,6 +128,11 @@ message Response {
     JoinFailReason reason = 5;
   }
 
+  message LeaveTournament {
+    string tournament_id = 1;
+    string message = 2;
+  }
+
   message LeaderboardEntries {
     repeated models.LeaderboardEntry scores = 1;
   }
@@ -208,5 +213,6 @@ message Response {
     RevokeBotToken revoke_bot_token = 28;
     RefundAttempts refund_attempts = 29;
     PermissionError permission_error = 30;
+    LeaveTournament leave_tournament = 31;
   }
 }
