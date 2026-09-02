@@ -1,5 +1,6 @@
 syntax = "proto3";
 package proto.packets;
+import "google/protobuf/timestamp.proto";
 
 option csharp_namespace = "TournamentAssistantShared.Models.Packets";
 
@@ -83,6 +84,18 @@ message Request {
     string tournament_id = 1;
     string qualifier_id = 2;
     models.QualifierEvent.LeaderboardSort qualifier_leaderboard_sort = 3;
+  }
+
+  message SetQualifierStartTime {
+    string tournament_id = 1;
+    string qualifier_id = 2;
+    google.protobuf.Timestamp start_time = 3;
+  }
+
+  message SetQualifierEndTime {
+    string tournament_id = 1;
+    string qualifier_id = 2;
+    google.protobuf.Timestamp end_time = 3;
   }
 
   message AddQualifierMaps {
@@ -434,5 +447,7 @@ message Request {
     SetTournamentRolePermissions set_tournament_role_permissions = 61;
     RemoveTournamentRole remove_tournament_role = 62;
     SetTournamentEnableReplayStreaming set_tournament_enable_replay_streaming = 64;
+    SetQualifierStartTime set_qualifier_start_time = 65;
+    SetQualifierEndTime set_qualifier_end_time = 66;
   }
 }

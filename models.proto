@@ -203,6 +203,8 @@ message QualifierEvent {
   repeated Map qualifier_maps = 5;
   EventSettings flags = 6;
   LeaderboardSort sort = 7;
+  google.protobuf.Timestamp start_time = 8;
+  google.protobuf.Timestamp end_time = 9;
 }
 
 message CoreServer {
