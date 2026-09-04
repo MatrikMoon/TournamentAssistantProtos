@@ -215,6 +215,32 @@ message CoreServer {
   int32 websocket_port = 4;
 }
 
+message Webhook {
+  enum Trigger {
+    None = 0;
+    TournamentUpdated = 1;
+    TournamentDeleted = 2;
+    UserAdded = 4;
+    UserUpdated = 8;
+    UserLeft = 16;
+    MatchCreated = 32;
+    MatchUpdated = 64;
+    MatchDeleted = 128;
+    QualifierCreated = 256;
+    QualifierUpdated = 512;
+    QualifierDeleted = 1024;
+    QualifierScoreSubmitted = 2048;
+    SongFinished = 4096;
+    All = 8191;
+  }
+
+  string guid = 1;
+  string tournament_id = 2;
+  string url = 3;
+  int64 triggers = 4;
+  bool has_signing_secret = 5;
+}
+
 message Tournament {
   message TournamentSettings {
     message Pool {

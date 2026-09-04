@@ -393,6 +393,31 @@ message Request {
     int32 count = 5;
   }
 
+  message GetWebhooks {
+    string tournament_id = 1;
+  }
+
+  message CreateWebhook {
+    string tournament_id = 1;
+    string url = 2;
+    int64 triggers = 3;
+    string signing_secret = 4;
+  }
+
+  message UpdateWebhook {
+    string tournament_id = 1;
+    string webhook_guid = 2;
+    string url = 3;
+    int64 triggers = 4;
+    bool replace_signing_secret = 5;
+    string signing_secret = 6;
+  }
+
+  message DeleteWebhook {
+    string tournament_id = 1;
+    string webhook_guid = 2;
+  }
+
   oneof type {
     UpdateUser update_user = 1;
     CreateMatch create_match = 2;
@@ -460,5 +485,9 @@ message Request {
     SetQualifierEndTime set_qualifier_end_time = 66;
     SetTournamentAllowMockClients set_tournament_allow_mock_clients = 67;
     LeaveTournament leave_tournament = 68;
+    GetWebhooks get_webhooks = 69;
+    CreateWebhook create_webhook = 70;
+    UpdateWebhook update_webhook = 71;
+    DeleteWebhook delete_webhook = 72;
   }
 }
