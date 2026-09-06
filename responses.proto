@@ -182,6 +182,25 @@ message Response {
     string current_permissions = 3;
   }
 
+  message GetWebhooks {
+    repeated models.Webhook webhooks = 1;
+  }
+
+  message CreateWebhook {
+    models.Webhook webhook = 1;
+    string message = 2;
+  }
+
+  message UpdateWebhook {
+    models.Webhook webhook = 1;
+    string message = 2;
+  }
+
+  message DeleteWebhook {
+    string webhook_guid = 1;
+    string message = 2;
+  }
+
   ResponseType type = 1;
   string responding_to_packet_id = 2;
   oneof details {
@@ -214,5 +233,9 @@ message Response {
     RefundAttempts refund_attempts = 29;
     PermissionError permission_error = 30;
     LeaveTournament leave_tournament = 31;
+    GetWebhooks get_webhooks = 32;
+    CreateWebhook create_webhook = 33;
+    UpdateWebhook update_webhook = 34;
+    DeleteWebhook delete_webhook = 35;
   }
 }
