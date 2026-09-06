@@ -160,6 +160,7 @@ message User {
   int64 stream_delay_ms = 10;
   int64 stream_sync_start_ms = 11;
   DiscordInfo discord_info = 12;
+  bool is_mock = 13;
 }
 
 message Match {
@@ -203,6 +204,8 @@ message QualifierEvent {
   repeated Map qualifier_maps = 5;
   EventSettings flags = 6;
   LeaderboardSort sort = 7;
+  google.protobuf.Timestamp start_time = 8;
+  google.protobuf.Timestamp end_time = 9;
 }
 
 message CoreServer {
@@ -241,6 +244,7 @@ message Tournament {
     repeated Role roles = 12;
     repeated string my_permissions = 13;
     bool enable_replay_streaming = 14;
+    bool allow_mock_clients = 15;
   }
 
   string guid = 1;
