@@ -201,6 +201,20 @@ message Response {
     string message = 2;
   }
 
+  message GetGlobalConfiguration {
+    models.GlobalConfiguration configuration = 1;
+  }
+
+  message UpdateGlobalConfiguration {
+    models.GlobalConfiguration configuration = 1;
+    string message = 2;
+  }
+
+  message CreateBKTournament {
+    string beat_khana_tournament_guid = 1;
+    models.Tournament tournament = 2;
+  }
+
   ResponseType type = 1;
   string responding_to_packet_id = 2;
   oneof details {
@@ -237,5 +251,8 @@ message Response {
     CreateWebhook create_webhook = 33;
     UpdateWebhook update_webhook = 34;
     DeleteWebhook delete_webhook = 35;
+    GetGlobalConfiguration get_global_configuration = 36;
+    UpdateGlobalConfiguration update_global_configuration = 37;
+    CreateBKTournament create_bk_tournament = 38;
   }
 }

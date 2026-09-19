@@ -241,6 +241,25 @@ message Webhook {
   bool has_signing_secret = 5;
 }
 
+message EndpointAccess {
+  string endpoint_id = 1;
+  string display_name = 2;
+  string route = 3;
+  bool supports_websocket = 4;
+  bool supports_rest = 5;
+  bool supports_player = 6;
+  bool websocket_enabled = 7;
+  bool rest_enabled = 8;
+  bool player_enabled = 9;
+  bool is_core = 10;
+}
+
+message GlobalConfiguration {
+  repeated string full_access_discord_ids = 1;
+  repeated string endpoint_manager_discord_ids = 2;
+  repeated EndpointAccess endpoints = 3;
+}
+
 message Tournament {
   message TournamentSettings {
     message Pool {
@@ -271,6 +290,8 @@ message Tournament {
     repeated string my_permissions = 13;
     bool enable_replay_streaming = 14;
     bool allow_mock_clients = 15;
+    bool is_bk_tournament = 16;
+    string beat_khana_tournament_guid = 17;
   }
 
   string guid = 1;

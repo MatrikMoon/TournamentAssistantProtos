@@ -418,6 +418,42 @@ message Request {
     string webhook_guid = 2;
   }
 
+  message GetGlobalConfiguration {
+  }
+
+  message UpdateGlobalConfiguration {
+    models.GlobalConfiguration configuration = 1;
+  }
+
+  // This message is used by the dedicated POST /bks/tournaments REST route.
+  // It is intentionally not part of the general packet oneof.
+  message CreateBKTournament {
+    message BeatKhanaUser {
+      string discord_id = 1;
+      string preferred_name = 2;
+      string avatar_url = 3;
+    }
+
+    message AuthorizedUser {
+      BeatKhanaUser user = 1;
+      repeated string role_ids = 2;
+    }
+
+    message WebhookRegistration {
+      string url = 1;
+      int64 triggers = 2;
+      string signing_secret = 3;
+    }
+
+    string beat_khana_tournament_guid = 1;
+    models.Tournament tournament = 2;
+    BeatKhanaUser organizer = 3;
+    repeated string organizer_permissions = 4;
+    repeated models.Role roles = 5;
+    repeated AuthorizedUser authorized_users = 6;
+    repeated WebhookRegistration webhooks = 7;
+  }
+
   oneof type {
     UpdateUser update_user = 1;
     CreateMatch create_match = 2;
@@ -489,5 +525,7 @@ message Request {
     CreateWebhook create_webhook = 70;
     UpdateWebhook update_webhook = 71;
     DeleteWebhook delete_webhook = 72;
+    GetGlobalConfiguration get_global_configuration = 73;
+    UpdateGlobalConfiguration update_global_configuration = 74;
   }
 }
