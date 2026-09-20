@@ -210,6 +210,11 @@ message Response {
     string message = 2;
   }
 
+  message SetBKTournamentLink {
+    models.Tournament tournament = 1;
+    string message = 2;
+  }
+
   message CreateBKTournament {
     string beat_khana_tournament_guid = 1;
     models.Tournament tournament = 2;
@@ -254,5 +259,6 @@ message Response {
     GetGlobalConfiguration get_global_configuration = 36;
     UpdateGlobalConfiguration update_global_configuration = 37;
     CreateBKTournament create_bk_tournament = 38;
+    SetBKTournamentLink set_bk_tournament_link = 39;
   }
 }
