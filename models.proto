@@ -231,7 +231,8 @@ message Webhook {
     QualifierDeleted = 1024;
     QualifierScoreSubmitted = 2048;
     SongFinished = 4096;
-    All = 8191;
+    ReplaySubmitted = 8192;
+    All = 16383;
   }
 
   string guid = 1;
@@ -258,6 +259,34 @@ message GlobalConfiguration {
   repeated string full_access_discord_ids = 1;
   repeated string endpoint_manager_discord_ids = 2;
   repeated EndpointAccess endpoints = 3;
+}
+
+// How long a recorded replay is kept before it expires
+enum ReplayRetention {
+  ThirtyDays = 0;
+  NinetyDays = 1;
+  OneYear = 2;
+  ThreeYears = 3;
+}
+
+// A .tarf replay a player submitted to the server
+message ReplayRecording {
+  string guid = 1;
+  string tournament_id = 2;
+  string match_id = 3;
+  string file_name = 4;
+  string platform_id = 5;
+  string player_name = 6;
+  string map_hash = 7;
+  string characteristic = 8;
+  int32 difficulty = 9;
+  // Unix times in milliseconds
+  int64 recorded_at = 10;
+  int64 submitted_at = 11;
+  int64 expires_at = 12;
+  int64 size = 13;
+  // Empty when the replay was not stored, for example when replay storage is unavailable
+  string download_url = 14;
 }
 
 message Tournament {
@@ -292,6 +321,12 @@ message Tournament {
     bool allow_mock_clients = 15;
     bool is_bk_tournament = 16;
     string beat_khana_tournament_guid = 17;
+    bool enable_replay_recording = 18;
+    ReplayRetention replay_retention = 19;
+    // Unix time in milliseconds of the last change to the tournament
+    int64 updated_at = 20;
+    // Unix time in milliseconds when a visible tournament gets hidden for being inactive, 0 when it is already hidden
+    int64 auto_hide_at = 21;
   }
 
   string guid = 1;

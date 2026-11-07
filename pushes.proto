@@ -35,9 +35,18 @@ message Push {
     models.LeaderboardEntry qualifier_score = 4;
   }
 
+  // Sent when a player submits a replay. When the server could not store it the replay itself is in data, so listeners still get it once
+  message ReplaySubmitted {
+    string tournament_id = 1;
+    models.ReplayRecording replay = 2;
+    bool stored = 3;
+    bytes data = 4;
+  }
+
   oneof data {
     models.RealtimeScore realtime_score = 1;
     SongFinished song_finished = 2;
     QualifierScoreSubmitted qualifier_score_submtited = 3;
+    ReplaySubmitted replay_submitted = 4;
   }
 }
