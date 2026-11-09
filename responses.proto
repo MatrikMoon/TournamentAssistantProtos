@@ -215,6 +215,26 @@ message Response {
     string message = 2;
   }
 
+  message SubmitReplay {
+    string message = 1;
+    // Only set once the last chunk has arrived
+    models.ReplayRecording replay = 2;
+  }
+
+  message GetReplays {
+    repeated models.ReplayRecording replays = 1;
+    int32 total_count = 2;
+    int32 page = 3;
+    int32 page_size = 4;
+    // False when the server has no replay storage or cannot reach it
+    bool storage_available = 5;
+  }
+
+  message DeleteReplay {
+    string replay_guid = 1;
+    string message = 2;
+  }
+
   message CreateBKTournament {
     string beat_khana_tournament_guid = 1;
     models.Tournament tournament = 2;
@@ -260,5 +280,8 @@ message Response {
     UpdateGlobalConfiguration update_global_configuration = 37;
     CreateBKTournament create_bk_tournament = 38;
     SetBKTournamentLink set_bk_tournament_link = 39;
+    SubmitReplay submit_replay = 40;
+    GetReplays get_replays = 41;
+    DeleteReplay delete_replay = 42;
   }
 }

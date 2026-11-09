@@ -433,6 +433,39 @@ message Request {
     string beat_khana_tournament_guid = 3;
   }
 
+  message SetTournamentEnableReplayRecording {
+    string tournament_id = 1;
+    bool enable_replay_recording = 2;
+  }
+
+  message SetTournamentReplayRetention {
+    string tournament_id = 1;
+    models.ReplayRetention replay_retention = 2;
+  }
+
+  // Replays are sent in chunks so they stay under the packet size limit. Every chunk of one replay shares an upload_id and the server answers each one before the next is sent
+  message SubmitReplay {
+    string tournament_id = 1;
+    string match_id = 2;
+    string upload_id = 3;
+    string file_name = 4;
+    int32 chunk_index = 5;
+    int32 chunk_count = 6;
+    int64 total_size = 7;
+    bytes data = 8;
+  }
+
+  message GetReplays {
+    string tournament_id = 1;
+    int32 page = 2;
+    int32 page_size = 3;
+  }
+
+  message DeleteReplay {
+    string tournament_id = 1;
+    string replay_guid = 2;
+  }
+
   // This message is used by the dedicated POST /bks/tournaments REST route.
   // It is intentionally not part of the general packet oneof.
   message CreateBKTournament {
@@ -536,5 +569,10 @@ message Request {
     GetGlobalConfiguration get_global_configuration = 73;
     UpdateGlobalConfiguration update_global_configuration = 74;
     SetBKTournamentLink set_bk_tournament_link = 75;
+    SetTournamentEnableReplayRecording set_tournament_enable_replay_recording = 76;
+    SetTournamentReplayRetention set_tournament_replay_retention = 77;
+    SubmitReplay submit_replay = 78;
+    GetReplays get_replays = 79;
+    DeleteReplay delete_replay = 80;
   }
 }
